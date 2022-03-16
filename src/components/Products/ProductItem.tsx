@@ -17,17 +17,16 @@ function ProductItem(props: any) {
   return (
     <li className={classes.item}>
       <Card sx={{ maxWidth: 445 }}>
-        <CardMedia
-          component="img"
-          alt={props.title}
-          image="https://images.unsplash.com/photo-1564466809058-bf4114d55352?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80"
-        />
+        <CardMedia component="img" alt={props.title} image={props.photos} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {props.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {props.description}
+          </Typography>
+          <Typography variant="h6" color="div" className={classes.price}>
+            {props.price}.00$
           </Typography>
         </CardContent>
         <CardActions>

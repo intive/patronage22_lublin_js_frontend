@@ -5,3 +5,8 @@
 .item img {
   height: 270px;
 }
+
+.price {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}

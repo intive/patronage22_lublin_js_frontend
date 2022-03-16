@@ -1,5 +1,10 @@
 function CartPage() {
-  return <h1>Cart Page</h1>;
+  return (
+    <section>
+      <h1>Your shopping Cart</h1>
+      <p>Your cart is empty</p>
+    </section>
+  );
 }
 
 export default CartPage;
