@@ -1,0 +1,13 @@
+.detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 2rem auto;
+}
+
+.detail img {
+  width: 350px;
+  height: 270px;
+  margin-right: 3rem;
+}
