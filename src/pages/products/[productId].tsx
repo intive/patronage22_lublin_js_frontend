@@ -1,4 +1,4 @@
-import ProductDetail from "../../components/Products/ProductDetail";
+import ProductDetail from "../../components/ProductDetails";
 
 function ProductDetails(props: any) {
   return (

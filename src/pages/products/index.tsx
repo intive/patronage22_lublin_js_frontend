@@ -1,4 +1,4 @@
-import ProductList from "../../components/Products/ProductList";
+import ProductList from "../../components/ProductList";
 
 function ProductsPage(props: any) {
   return (
