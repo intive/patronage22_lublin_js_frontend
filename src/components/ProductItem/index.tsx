@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import classes from "./index.module.css";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -15,7 +14,7 @@ function ProductItem(props: any) {
   }
 
   return (
-    <li className={classes.item}>
+    <li className="item">
       <Card sx={{ maxWidth: 445 }}>
         <CardMedia component="img" alt={props.title} image={props.photos} />
         <CardContent>
@@ -25,7 +24,7 @@ function ProductItem(props: any) {
           <Typography variant="body2" color="text.secondary">
             {props.description}
           </Typography>
-          <Typography variant="h6" color="div" className={classes.price}>
+          <Typography variant="h6" color="div" className="price">
             {props.price}.00$
           </Typography>
         </CardContent>

@@ -18,7 +18,117 @@ h6 {
   font-family: "Lato", sans-serif;
 }
 
+/* Main */
+.main {
+  margin: 2rem auto;
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+.location {
+  color: #0056ad;
+}
+
 h1 {
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  margin: 2.5rem 0;
+}
+
+/* Header */
+.app-bar {
+  background-color: #fff;
+  color: #557fa8;
+}
+
+.nav-link {
+  color: #557fa8;
+  text-decoration: none;
+}
+
+/* Login & Register Forms */
+.form {
+  background-color: #fff;
+  color: #000;
+  padding: 40px;
+  box-shadow: 0 4px 10px rgba(49, 43, 43, 0.2);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  margin: 5vh;
+  width: 400px;
+}
+
+.errors {
+  font-size: 0.8rem;
+  color: red;
+  margin-top: 0.2rem;
+  font-style: italic;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.form h1 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: #2596be;
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.actions button:hover {
+  background-color: lightgray;
+  border-color: #fff;
+}
+
+.actions .error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+/* Product Item */
+.item {
+  width: 350px;
+}
+
+.item img {
+  height: 270px;
+}
+
+.price {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Product List */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list li {
+  margin: 0 1.5rem 1.5rem 0;
 }

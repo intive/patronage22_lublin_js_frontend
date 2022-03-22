@@ -1,6 +1,5 @@
 import { FormControl, FormLabel, FormHelperText, Input } from "@mui/material";
-import React, { useRef, useContext, useState } from "react";
-import classes from "./index.module.css";
+import React, { useRef } from "react";
 import { Formik, Form } from "formik";
 import Link from "next/link";
 
@@ -22,7 +21,7 @@ function LoginForm() {
   const initialValues: MyFormValues = { email: "", password: "" };
 
   return (
-    <section className={classes.container}>
+    <section className="container">
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
@@ -31,7 +30,7 @@ function LoginForm() {
           actions.setSubmitting(false);
         }}
       >
-        <Form onSubmit={submitHandler} className={classes.form}>
+        <Form onSubmit={submitHandler} className="form">
           <h1>Login</h1>
           <FormControl>
             <FormLabel htmlFor="email">Email address</FormLabel>
@@ -60,7 +59,7 @@ function LoginForm() {
             />
           </FormControl>
 
-          <div className={classes.actions}>
+          <div className="actions">
             <button>Login</button>
           </div>
           <p>

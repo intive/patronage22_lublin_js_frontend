@@ -1,9 +1,8 @@
 import React from "react";
-import classes from "./index.module.css";
 
 function ProductDetail(props: any) {
   return (
-    <section className={classes.detail}>
+    <section>
       <img src={props.photos} alt={props.title} />
       <div>
         <h1>{props.title}</h1>

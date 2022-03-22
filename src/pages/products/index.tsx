@@ -2,10 +2,12 @@ import ProductList from "../../components/ProductList";
 
 function ProductsPage(props: any) {
   return (
-    <>
-      <h1>Latest Products</h1>
+    <section>
+      <h1>
+        Home <span className="location"> {">"} Products</span>
+      </h1>
       <ProductList products={props.products} />
-    </>
+    </section>
   );
 }
 

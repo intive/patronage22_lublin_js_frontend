@@ -3,8 +3,12 @@ import ProductDetail from "../../components/ProductDetails";
 function ProductDetails(props: any) {
   return (
     <>
-      <h1 style={{ textTransform: "uppercase", letterSpacing: "2px" }}>
-        Product Details
+      <h1>
+        Home {">"} Products{" "}
+        <span className="location">
+          {" "}
+          {">"} {props.productData.title}
+        </span>
       </h1>
       <ProductDetail
         title={props.productData.title}

@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./Layout.module.css";
 import MainNavigation from "../MainNavigation";
 
 interface Props {
@@ -10,7 +9,7 @@ function Layout(props: Props) {
   return (
     <div>
       <MainNavigation />
-      <main className={classes.main}>{props.children}</main>
+      <main className="main">{props.children}</main>
     </div>
   );
 }

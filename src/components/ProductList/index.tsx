@@ -1,9 +1,8 @@
 import ProductItem from "../ProductItem";
-import classes from "./index.module.css";
 
 function ProductList(props: any) {
   return (
-    <ul className={classes.list}>
+    <ul className="list">
       {props.products.map((product: any) => (
         <ProductItem
           key={product.id}
