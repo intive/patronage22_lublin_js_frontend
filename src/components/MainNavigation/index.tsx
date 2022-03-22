@@ -103,7 +103,13 @@ const MainNavigation = () => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              marginLeft: "30vw",
+            }}
+          >
             {pages.map((page) => (
               <Link
                 href={page === "Home" ? "/" : `/${page.toLocaleLowerCase()}`}

@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;700&display=swap");
 
+:root {
+  --color-primary: #557fa8;
+  --color-primary-dark: #0056ad;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -26,7 +31,7 @@ h6 {
 }
 
 .location {
-  color: #0056ad;
+  color: var(--color-primary-dark);
 }
 
 h1 {
@@ -40,8 +45,9 @@ h1 {
 }
 
 .nav-link {
-  color: #557fa8;
+  color: var(--color-primary-dark);
   text-decoration: none;
+  text-transform: capitalize;
 }
 
 /* Login & Register Forms */
