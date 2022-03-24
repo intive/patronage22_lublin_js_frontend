@@ -15,6 +15,7 @@ import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FaceIcon from "@mui/icons-material/Face";
 
+
 const pages = ["Home", "About", "Products"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -50,7 +51,6 @@ const MainNavigation = () => {
           >
             LOGO
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
