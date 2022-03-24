@@ -6,7 +6,15 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-function ProductItem(props: any) {
+interface ProductItemProps {
+  id: number;
+  photos: string;
+  title: string;
+  description: string;
+  price: number;
+}
+
+function ProductItem(props: ProductItemProps) {
   const router = useRouter();
 
   function showDetailsHandler() {

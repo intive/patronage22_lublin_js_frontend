@@ -1,28 +1,31 @@
 import ProductDetail from "../../components/ProductDetails";
+import { GetStaticProps, GetStaticPaths } from "next";
+import { InferGetStaticPropsType } from "next";
+import { loadProductDetails, loadProducts } from "../../lib/products";
 
-function ProductDetails(props: any) {
+function ProductDetails({
+  productData,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <h1>
         Home {">"} Products{" "}
         <span className="location">
           {" "}
-          {">"} {props.productData.title}
+          {">"} {productData.title}
         </span>
       </h1>
       <ProductDetail
-        title={props.productData.title}
-        description={props.productData.description}
+        title={productData.title}
+        description={productData.description}
+        photos={productData.photos}
       />
     </>
   );
 }
 
-export async function getStaticPaths() {
-  const res = await fetch(
-    "http://proxy-patronageapi.bsolutions.usermd.net/api/products/getAllProductsExternal"
-  );
-  const products = await res.json();
+export const getStaticPaths: GetStaticPaths = async () => {
+  const products = await loadProducts();
 
   return {
     fallback: "blocking",
@@ -30,15 +33,12 @@ export async function getStaticPaths() {
       params: { productId: product.id.toString() },
     })),
   };
-}
+};
 
-export async function getStaticProps(context: any) {
+export const getStaticProps: GetStaticProps = async (context: any) => {
   const productId = context.params.productId;
 
-  const res = await fetch(
-    `http://proxy-patronageapi.bsolutions.usermd.net/api/products/external/${productId}`
-  );
-  const selectedProduct = await res.json();
+  const selectedProduct = await loadProductDetails(productId);
 
   return {
     props: {
@@ -46,9 +46,10 @@ export async function getStaticProps(context: any) {
         id: selectedProduct.id.toString(),
         title: selectedProduct.title,
         description: selectedProduct.description,
+        photos: selectedProduct.photos[0].url,
       },
     },
   };
-}
+};
 
 export default ProductDetails;

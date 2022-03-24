@@ -1,21 +1,23 @@
 import ProductList from "../../components/ProductList";
+import { InferGetStaticPropsType } from "next";
+import { GetStaticProps } from "next";
+import { loadProducts } from "../../lib/products";
 
-function ProductsPage(props: any) {
+function ProductsPage({
+  products,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <section>
       <h1>
         Home <span className="location"> {">"} Products</span>
       </h1>
-      <ProductList products={props.products} />
+      <ProductList products={products} />
     </section>
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch(
-    "http://proxy-patronageapi.bsolutions.usermd.net/api/products/getAllProductsExternal"
-  );
-  const products = await res.json();
+export const getStaticProps: GetStaticProps = async () => {
+  const products = await loadProducts();
 
   return {
     props: {
@@ -28,6 +30,6 @@ export async function getStaticProps() {
       })),
     },
   };
-}
+};
 
 export default ProductsPage;
