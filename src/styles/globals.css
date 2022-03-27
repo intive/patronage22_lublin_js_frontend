@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;700&display=swap");
 
 :root {
-  --color-primary: #557fa8;
-  --color-primary-dark: #0056ad;
+  --color-primary: #0056AD;
+  --color-primary-dark: #003E7D;
 }
 
 * {
@@ -11,7 +11,8 @@
 
 body {
   font-family: "Open Sans", "Lato", sans-serif;
-  margin: 0;
+  margin: 0 auto;
+  background-color: #f1f5f8;
 }
 
 h1,
@@ -21,6 +22,7 @@ h4,
 h5,
 h6 {
   font-family: "Lato", sans-serif;
+  color: #102A42;
 }
 
 /* Main */
@@ -28,10 +30,11 @@ h6 {
   margin: 2rem auto;
   width: 100%;
   padding: 0 1.5rem;
+  max-width: 1200px;
 }
 
 .location {
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
 }
 
 h1 {
@@ -40,14 +43,19 @@ h1 {
 
 /* Header */
 .app-bar {
-  background-color: #fff;
-  color: #557fa8;
+  background-color: transparent;
+  color: var(--color-primary);
+  box-shadow: none;
+
+
+
 }
 
 .nav-link {
   color: var(--color-primary-dark);
   text-decoration: none;
   text-transform: capitalize;
+
 }
 
 /* Login & Register Forms */

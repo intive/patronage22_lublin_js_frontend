@@ -3,9 +3,9 @@ import ProductList from "../../components/ProductList";
 function ProductsPage(props: any) {
   return (
     <section>
-      <h1>
+      <h3>
         Home <span className="location"> {">"} Products</span>
-      </h1>
+      </h3>
       <ProductList products={props.products} />
     </section>
   );

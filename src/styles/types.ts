@@ -8,6 +8,11 @@ export interface ThemeOptions {
             main: string,
             light:string,
         },
+        primary: {
+            main: string,
+            light:string,
+            dark:string,
+        },
         background: {
             default: string,
         },
