@@ -1,11 +1,12 @@
-import Link from "next/link";
+import Hero from "../components/Hero";
+import PopularProducts from "../components/PopularProducts";
+
 
 function HomePage(props: any) {
   return (
     <section>
-      <p>
-        Check out our new <Link href="products">products</Link>
-      </p>
+      <Hero/>
+      <PopularProducts/>
     </section>
   );
 }

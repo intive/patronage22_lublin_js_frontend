@@ -1,9 +1,9 @@
 function AboutPage() {
   return (
     <section>
-      <h1>
+      <h3>
         Home <span className="location"> {">"} About</span>
-      </h1>
+      </h3>
     </section>
   );
 }

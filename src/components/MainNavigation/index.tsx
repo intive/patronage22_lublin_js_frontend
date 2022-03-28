@@ -14,8 +14,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FaceIcon from "@mui/icons-material/Face";
+import Image from 'next/image'
 
-const pages = ["Home", "About", "Products"];
+
+const pages = ["Home", "About", "Products",];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const MainNavigation = () => {
@@ -39,19 +41,24 @@ const MainNavigation = () => {
   };
 
   return (
-    <AppBar position="static" className="app-bar">
-      <Container maxWidth="xl">
+    <AppBar position="static" className="app-bar"  sx={{ mt:3}}>
+      <Container maxWidth="lg" >
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{ mr: 2, display: { xs: "none", md: "block" } }}
           >
-            LOGO
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              width={45}
+              height={45}
+            />
+             <Typography variant='subtitle2' color='#0057D8'lineHeight={1}>e-shop</Typography>
           </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none"} }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -94,20 +101,26 @@ const MainNavigation = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <Typography
-            variant="h6"
+            <Typography
+              variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            sx={{ mr: 2, display: { xs: "block", md: "none" } }}
           >
-            LOGO
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              width={40}
+              height={40}
+            />
+             <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>e-shop</Typography>
           </Typography>
+          </Box>
           <Box
             sx={{
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
-              marginLeft: "30vw",
+              justifyContent: "center",
             }}
           >
             {pages.map((page) => (
@@ -129,7 +142,7 @@ const MainNavigation = () => {
           {userLogged ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{ size:'medium', p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
@@ -177,58 +190,3 @@ const MainNavigation = () => {
 };
 export default MainNavigation;
 
-/*
-import React from "react";
-import classes from "./index.module.css";
-import Link from "next/link";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import FaceIcon from "@mui/icons-material/Face";
-
-function MainNavigation() {
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" className={classes.box}>
-        <Toolbar className={classes.toolbar}>
-          <Link href="/">
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 2 }}
-              style={{ cursor: "pointer" }}
-            >
-              LOGO
-            </Typography>
-          </Link>
-          <div className={classes.menu}>
-            <Link href="/about">
-              <Button color="inherit">About Us</Button>
-            </Link>
-            <Link href="/contact">
-              <Button color="inherit">Contact</Button>
-            </Link>
-          </div>
-          <Link href="/cart">
-            <Button color="inherit">
-              <ShoppingCartIcon className={classes.icon} /> Cart
-            </Button>
-          </Link>
-          <Link href="/login">
-            <Button color="inherit">
-              <FaceIcon className={classes.icon} /> Login
-            </Button>
-          </Link>
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
-}
-
-export default MainNavigation;
-*/
