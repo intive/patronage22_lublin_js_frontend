@@ -1,6 +1,10 @@
 import ProductItem from "../ProductItem";
 
-function ProductList(props: any) {
+interface ProductListProps {
+  products: [];
+}
+
+function ProductList(props: ProductListProps) {
   return (
     <ul className="list">
       {props.products.map((product: any) => (
