@@ -7,6 +7,7 @@ import MainButton from "../MainButton";
 import Link from "next/link";
 
 
+
 const CustomText = styled(Typography)(({ theme }) => ({
     color: theme.palette.info.light
 }));

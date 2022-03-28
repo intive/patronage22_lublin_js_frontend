@@ -36,7 +36,7 @@ export async function getStaticProps(context: any) {
   const productId = context.params.productId;
 
   const res = await fetch(
-    `http://proxy-patronageapi.bsolutions.usermd.net/api/products/external/${productId}`
+   ` http://proxy-patronageapi.bsolutions.usermd.net/api/products/external/${productId}`
   );
   const selectedProduct = await res.json();
 
