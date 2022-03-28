@@ -16,6 +16,7 @@
     "@material-ui/icons": "^4.11.2",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
+    "axios": "^0.26.1",
     "formik": "^2.2.9",
     "next": "10.0.6",
     "postcss": "^8.4.12",

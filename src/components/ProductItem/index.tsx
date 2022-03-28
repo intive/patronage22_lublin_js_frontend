@@ -5,48 +5,52 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
+import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import { Box, Stack } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
 const CustomIcon = styled(IconButton)(({ theme }) => ({
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   background: theme.palette.primary.main,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '3rem',
-  height: '3rem',
-  borderRadius: '50%',
-  transition: 'all 0.3s linear',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "3rem",
+  height: "3rem",
+  borderRadius: "50%",
+  transition: "all 0.3s linear",
   opacity: 0,
-  cursor: 'pointer',
-  '&:hover ': {
+  cursor: "pointer",
+  "&:hover ": {
     background: theme.palette.primary.main,
   },
-
-
 }));
 
 const CustomContainer = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  backgroundColor: '#222',
-  borderRadius: '0.25rem',
-  '&:hover img': {
+  position: "relative",
+  backgroundColor: "#222",
+  borderRadius: "0.25rem",
+  "&:hover img": {
     opacity: 0.5,
-    cursor: 'pointer',
+    cursor: "pointer",
   },
-  '&:hover button': {
+  "&:hover button": {
     opacity: 1,
   },
-
-
 }));
 
-function ProductItem(props: any) {
+interface ProductItemProps {
+  id: number;
+  photos: string;
+  title: string;
+  description: string;
+  price: number;
+}
+
+function ProductItem(props: ProductItemProps) {
   const router = useRouter();
 
   function showDetailsHandler() {
@@ -57,17 +61,25 @@ function ProductItem(props: any) {
     <div className="item">
       <Card>
         <CustomContainer>
-          <CardMedia component="img" alt={props.title} image={props.photos} sx={{ transition: 'all 0.3s linear' }} />
+          <CardMedia
+            component="img"
+            alt={props.title}
+            image={props.photos}
+            sx={{ transition: "all 0.3s linear" }}
+          />
           <CustomIcon onClick={showDetailsHandler}>
             <ZoomInOutlinedIcon
               sx={{
-                color: "white", fontSize: '40px'
+                color: "white",
+                fontSize: "40px",
               }}
             />
           </CustomIcon>
         </CustomContainer>
         <CardContent>
-          <Stack direction='row' justifyContent="space-between"
+          <Stack
+            direction="row"
+            justifyContent="space-between"
             alignItems="flex-start"
             spacing={2}
           >

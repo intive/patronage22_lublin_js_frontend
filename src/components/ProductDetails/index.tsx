@@ -1,6 +1,12 @@
 import React from "react";
 
-function ProductDetail(props: any) {
+interface ProductDetailProps {
+  photos: string;
+  title: string;
+  description: string;
+}
+
+function ProductDetail(props: ProductDetailProps) {
   return (
     <section>
       <img src={props.photos} alt={props.title} />
