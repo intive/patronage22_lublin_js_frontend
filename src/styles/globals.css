@@ -146,3 +146,10 @@ h1 {
 .list li {
   margin: 0 1.5rem 1.5rem 0;
 }
+.all-layout{
+  position: relative;
+  min-height: 100vh;
+}
+.layout{
+  padding-bottom: 5rem;
+}

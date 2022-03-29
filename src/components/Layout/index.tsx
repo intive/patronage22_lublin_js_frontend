@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Footer";
 import MainNavigation from "../MainNavigation";
 
 interface Props {
@@ -7,9 +8,12 @@ interface Props {
 
 function Layout(props: Props) {
   return (
-    <div>
-      <MainNavigation />
-      <main className='main'>{props.children}</main>
+
+    <div className='all-layout' >
+      <div className='layout'>
+        <MainNavigation />
+        <main className='main'>{props.children}</main></div>
+        <Footer/>
     </div>
   );
 }

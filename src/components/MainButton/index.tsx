@@ -37,11 +37,11 @@ export type Ref = HTMLButtonElement;
 
 const MainButton = React.forwardRef<Ref, Props>(({ onClick, href, children }, ref) => {
   return (
-    <Button
+    <CustomButton
       variant='contained' href={href} onClick={onClick} ref={ref}
     >
       {children}
-    </Button>
+    </CustomButton>
   )
 });
 

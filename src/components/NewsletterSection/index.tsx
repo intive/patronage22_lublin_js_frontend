@@ -1,10 +1,7 @@
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import HeroCarousel from "../HeroCarousel";
 import { styled } from '@mui/material/styles';
-import MainButton from "../MainButton";
-import Link from "next/link";
 import NewsletterForm from "../NewsletterForm";
 
 
