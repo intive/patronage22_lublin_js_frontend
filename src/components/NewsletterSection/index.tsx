@@ -5,6 +5,7 @@ import HeroCarousel from "../HeroCarousel";
 import { styled } from '@mui/material/styles';
 import MainButton from "../MainButton";
 import Link from "next/link";
+import NewsletterForm from "../NewsletterForm";
 
 
 
@@ -12,42 +13,30 @@ const CustomText = styled(Typography)(({ theme }) => ({
     color: theme.palette.info.light
 }));
 
-function Hero(props: any) {
+function NewsletterSection(props: any) {
     return (
-        <Box sx={{ marginTop:10,flexGrow: 1 }}>
+        <Box sx={{ marginTop: 20, flexGrow: 1 }}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
-                    <Box sx={{ marginTop:10 }}>
+                    <Box>
                         <Box>
                             <Typography
                                 variant='h4'
                             >
-                                Brands You know and love
-                            </Typography>
-                            <Typography variant='h4'>
-                                Shopping has never been easier
+                                Join our newsletter and get 10% off
                             </Typography>
                         </Box>
                         <CustomText variant='inherit'>
                             <Box sx={{ marginTop: 3, fontWeight: '300', fontSize: 20 }}>
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                                 Iusto, at sed omnis corporis doloremque possimus velit!
-                                Repudiandae nisi odit, aperiam odio ducimus,obcaecati
-                                libero et quia tempora excepturi quis alias?
                             </Box>
                         </CustomText>
-                        <Box sx={{ marginTop: 3 }}>
-                        <Link href="/products" passHref>
-                            <MainButton>
-                                SHOP NOW
-                            </MainButton>
-                            </Link>
-                        </Box>
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <Box>
-                        <HeroCarousel />
+                    <Box sx={{ marginTop: 5, textAlign:'end' }}>
+                        <NewsletterForm />
                     </Box>
                 </Grid>
             </Grid>
@@ -55,4 +44,4 @@ function Hero(props: any) {
     );
 }
 
-export default Hero;
+export default NewsletterSection;

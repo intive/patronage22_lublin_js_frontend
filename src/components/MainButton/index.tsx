@@ -29,6 +29,7 @@ type Props = {
   children: React.ReactNode;
   onClick?: (e: any) => void;
   href?: string;
+  type?:string;
 }
 
 export type Ref = HTMLButtonElement;

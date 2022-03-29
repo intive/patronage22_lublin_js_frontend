@@ -23,7 +23,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-swipeable-views": "^0.14.0",
-    "react-swipeable-views-utils": "^0.14.0"
+    "react-swipeable-views-utils": "^0.14.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
