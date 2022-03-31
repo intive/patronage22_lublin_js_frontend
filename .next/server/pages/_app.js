@@ -3703,7 +3703,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _MainNavigation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../MainNavigation */ "./src/components/MainNavigation/index.tsx");
 
-var _jsxFileName = "C:\\Users\\Dmytro\\Desktop\\frontend\\patronage22_lublin_js_frontend\\src\\components\\Layout\\index.tsx";
+var _jsxFileName = "C:\\Users\\Dmytro\\Desktop\\frontend_patronage\\patronage22_lublin_js_frontend\\src\\components\\Layout\\index.tsx";
 
 
 
@@ -3778,7 +3778,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! next/image */ "./node_modules/next/image.js");
 /* harmony import */ var next_image__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(next_image__WEBPACK_IMPORTED_MODULE_17__);
 
-var _jsxFileName = "C:\\Users\\Dmytro\\Desktop\\frontend\\patronage22_lublin_js_frontend\\src\\components\\MainNavigation\\index.tsx";
+var _jsxFileName = "C:\\Users\\Dmytro\\Desktop\\frontend_patronage\\patronage22_lublin_js_frontend\\src\\components\\MainNavigation\\index.tsx";
 
 
 
@@ -4169,7 +4169,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_mui_material_styles__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _styles_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../styles/theme */ "./src/styles/theme.ts");
 
-var _jsxFileName = "C:\\Users\\Dmytro\\Desktop\\frontend\\patronage22_lublin_js_frontend\\src\\pages\\_app.tsx";
+var _jsxFileName = "C:\\Users\\Dmytro\\Desktop\\frontend_patronage\\patronage22_lublin_js_frontend\\src\\pages\\_app.tsx";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 

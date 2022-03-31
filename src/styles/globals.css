@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;700&display=swap");
 
 :root {
-  --color-primary: #0056AD;
-  --color-primary-dark: #003E7D;
+  --color-primary: #0056ad;
+  --color-primary-dark: #003e7d;
 }
 
 * {
@@ -22,7 +22,7 @@ h4,
 h5,
 h6 {
   font-family: "Lato", sans-serif;
-  color: #102A42;
+  color: #102a42;
 }
 
 /* Main */
@@ -46,16 +46,12 @@ h1 {
   background-color: transparent;
   color: var(--color-primary);
   box-shadow: none;
-
-
-
 }
 
 .nav-link {
   color: var(--color-primary-dark);
   text-decoration: none;
   text-transform: capitalize;
-
 }
 
 /* Login & Register Forms */
@@ -122,11 +118,13 @@ h1 {
 
 /* Product Item */
 .item {
-  width: 350px;
+  width: 250px;
+  margin: 0.5rem 1rem;
 }
 
 .item img {
-  height: 270px;
+  height: 150px;
+  width: 100%;
 }
 
 .price {
@@ -141,8 +139,9 @@ h1 {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  flex-grow: 1;
 }
 
-.list li {
-  margin: 0 1.5rem 1.5rem 0;
+.category-item.active {
+  text-decoration: underline;
 }
