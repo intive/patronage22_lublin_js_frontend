@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import { useRouter } from "next/router";
+import MainButton from "../MainButton";
 
 interface ProductListProps {
   products: any;
@@ -17,7 +18,7 @@ function ListProductsView(props: ProductListProps) {
   const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1),
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     color: theme.palette.text.secondary,
   }));
@@ -83,23 +84,35 @@ function ListProductsView(props: ProductListProps) {
                 />
               </CustomIcon>
             </CustomContainer>
-            <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
-              {product.description}
-            </Typography>
-            <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
-              {product.category}
-            </Typography>
             <Stack
               direction="column"
               justifyContent="center"
               alignItems="flex-start"
               spacing={3}
+              style={{ marginLeft: "1.5rem" }}
             >
-              <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
+              <Typography sx={{ fontSize: 16 }} gutterBottom component="h3">
                 {product.title}
               </Typography>
+              <Typography
+                sx={{ fontSize: 14 }}
+                gutterBottom
+                style={{ marginTop: "-0.5rem" }}
+                component="div"
+              >
+                ${product.price}
+              </Typography>
+              <Typography sx={{ fontSize: 14 }} gutterBottom component="h3">
+                {product.description}
+              </Typography>
               <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
-                {product.price}.00$
+                <MainButton
+                  onClick={() => {
+                    router.push("/products/" + product.id);
+                  }}
+                >
+                  Details
+                </MainButton>
               </Typography>
             </Stack>
           </Item>
