@@ -8,10 +8,12 @@ function ProductsPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <section>
-      <h3>
+      <h2>
         Home <span className="location"> {">"} Products</span>
       </h3>
       <ProductList products={products} />
+      {/* </h2>
+      <ProductList products={props.products} /> */}
     </section>
   );
 }

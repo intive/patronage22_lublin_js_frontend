@@ -7,20 +7,20 @@ function ProductDetails({
   productData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
-      <h1>
+    <section>
+      <h2>
         Home {">"} Products{" "}
         <span className="location">
           {" "}
           {">"} {productData.title}
         </span>
-      </h1>
+      </h2>
       <ProductDetail
         title={productData.title}
         description={productData.description}
         photos={productData.photos}
       />
-    </>
+    </section>
   );
 }
 
