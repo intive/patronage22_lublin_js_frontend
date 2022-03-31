@@ -1,7 +1,7 @@
 import ProductItem from "../ProductItem";
 
 interface ProductListProps {
-  products: [];
+  products: any;
 }
 
 function ProductList(props: ProductListProps) {
