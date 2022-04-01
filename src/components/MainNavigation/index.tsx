@@ -41,8 +41,8 @@ const MainNavigation = () => {
   };
 
   return (
-    <AppBar position="static" className="app-bar"  sx={{ mt:3}}>
-      <Container maxWidth="lg" >
+    <AppBar position="static" className="app-bar">
+      <Container maxWidth="lg" sx={{ mt:3}} >
         <Toolbar disableGutters>
           <Typography
             variant="h6"

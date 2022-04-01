@@ -19,6 +19,7 @@ function ProductDetails({
         title={productData.title}
         description={productData.description}
         photos={productData.photos}
+        // price={props.productData.price}
       />
     </section>
   );
@@ -47,6 +48,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         title: selectedProduct.title,
         description: selectedProduct.description,
         photos: selectedProduct.photos[0].url,
+        price:selectedProduct.price
       },
     },
   };

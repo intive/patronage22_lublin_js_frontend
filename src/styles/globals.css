@@ -41,6 +41,9 @@ h1 {
   margin: 2.5rem 0;
 }
 
+
+section{margin-top:100px}
+
 /* Header */
 .app-bar {
   background-color: transparent;
@@ -145,4 +148,10 @@ h1 {
 
 .list li {
   margin: 0 1.5rem 1.5rem 0;
+}
+
+.active {
+  border: 2px solid 
+  var(--color-primary) ; 
+ 
 }
