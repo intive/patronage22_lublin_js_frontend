@@ -49,6 +49,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         description: selectedProduct.description,
         photos: selectedProduct.photos[0].url,
         price:selectedProduct.price
+        // photos: selectedProduct.photos[0].url,
       },
     },
   };
