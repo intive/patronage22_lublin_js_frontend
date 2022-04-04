@@ -149,10 +149,7 @@ function ProductsPage() {
     <section>
       <h2>
         Home <span className="location"> {">"} Products</span>
-      </h3>
-      <ProductList products={products} />
-      {/* </h2>
-      <ProductList products={props.products} /> */}
+      </h2>
       <Box sx={{ marginTop: 5 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={3}>
