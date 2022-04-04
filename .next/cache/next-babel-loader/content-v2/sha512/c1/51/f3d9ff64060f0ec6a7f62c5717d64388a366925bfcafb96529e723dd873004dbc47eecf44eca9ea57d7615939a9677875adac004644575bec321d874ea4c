@@ -1,1 +1,0 @@
-{"ast":null,"code":"","map":{"version":3,"sources":[],"names":[],"mappings":"","sourcesContent":["export interface ThemeOptions {\n    palette?: {\n        common?: {\n            black: string;\n            white:string;\n        }\n        primary?: {\n            main: string;\n            dark:string;\n        }\n    }\n}"]},"metadata":{},"sourceType":"script"}
