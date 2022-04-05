@@ -19,7 +19,11 @@ yarn-debug.log*
 yarn-error.log*
 
 .eslintcache
+<<<<<<< HEAD
 
 # Optional REPL history
 .node_repl_history
 .next
+=======
+.next
+>>>>>>> 7c897a4d (change .gitignore)

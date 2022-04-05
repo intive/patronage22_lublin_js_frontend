@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FaceIcon from "@mui/icons-material/Face";
-import Image from 'next/image'
+import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 
 const pages = ["Home", "About", "Products",];
@@ -41,8 +41,8 @@ const MainNavigation = () => {
   };
 
   return (
-    <AppBar position="static" className="app-bar"  sx={{ mt:3}}>
-      <Container maxWidth="lg" >
+    <AppBar position="static" className="app-bar">
+      <Container maxWidth="lg" sx={{ mt:3}} >
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -50,13 +50,8 @@ const MainNavigation = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "block" } }}
           >
-            <Image
-              src="/logo.svg"
-              alt="Logo"
-              width={45}
-              height={45}
-            />
-             <Typography variant='subtitle2' color='#0057D8'lineHeight={1}>e-shop</Typography>
+<WhatshotIcon sx={{ fontSize: 50, color:'#0057D8' }}/>
+             <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>e-shop</Typography>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none"} }}>
             <IconButton
@@ -107,12 +102,7 @@ const MainNavigation = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "block", md: "none" } }}
           >
-            <Image
-              src="/logo.svg"
-              alt="Logo"
-              width={40}
-              height={40}
-            />
+            <WhatshotIcon sx={{ fontSize: 50, color:'#0057D8' }}/>
              <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>e-shop</Typography>
           </Typography>
           </Box>

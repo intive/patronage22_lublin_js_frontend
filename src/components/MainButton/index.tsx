@@ -29,6 +29,7 @@ type Props = {
   children: React.ReactNode;
   onClick?: (e: any) => void;
   href?: string;
+  type?:string;
 }
 
 export type Ref = HTMLButtonElement;
@@ -36,11 +37,11 @@ export type Ref = HTMLButtonElement;
 
 const MainButton = React.forwardRef<Ref, Props>(({ onClick, href, children }, ref) => {
   return (
-    <Button
+    <CustomButton
       variant='contained' href={href} onClick={onClick} ref={ref}
     >
       {children}
-    </Button>
+    </CustomButton>
   )
 });
 
