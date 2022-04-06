@@ -14,6 +14,7 @@ import SearchBar from "../../components/SearchBar";
 import Categories from "../../components/Categories";
 import Companies from "../../components/Companies";
 import Sort from "../../components/Sort";
+import { SelectChangeEvent } from "@mui/material";
 
 const products = [
   {
@@ -85,31 +86,26 @@ function ProductsPage() {
     })
   );
 
-  const [company, setCompany] = useState("");
-  const [price, setPrice] = useState<any>(maxPrice);
-  const [sortCondition, setSortCondition] = useState("");
+  const [company, setCompany] = useState<string>("");
+  const [price, setPrice] = useState<number>(maxPrice);
+  const [sortCondition, setSortCondition] = useState<string>("");
   const [isListView, setListView] = useState<boolean>(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState<any>(null);
-
-  const categories = [
-    "All",
-    "Books",
-    "Clothing",
-    "Furnitures",
-    "Accessorries",
-    "Jewelery",
-  ];
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
 
   const handleSliderChange = (event: any, newValue: any) => {
     setPrice(newValue);
   };
 
-  const handleChange = (event: any) => {
+  const handleCompanyChange = (event: SelectChangeEvent<string>) => {
     setCompany(event.target.value);
   };
 
-  const handleSortChange = (event: any) => {
+  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+    setCategory(event.target.value);
+  };
+
+  const handleSortChange = (event: SelectChangeEvent<string>) => {
     setSortCondition(event.target.value);
   };
 
@@ -125,25 +121,8 @@ function ProductsPage() {
     setPrice(maxPrice);
     setSortCondition("");
     setSearchTerm("");
-    setCategory(null);
+    setCategory("");
   };
-
-  if (typeof window === "object") {
-    const categoryList = document.querySelectorAll(".category-item");
-    categoryList.forEach((item) => {
-      if (item.classList.contains("active")) {
-        item.classList.remove("active");
-      }
-      item.addEventListener("click", () => {
-        item.classList.add("active");
-        if (item.textContent === "All") {
-          setCategory(null);
-        } else {
-          setCategory(item.textContent);
-        }
-      });
-    });
-  }
 
   return (
     <section>
@@ -159,9 +138,9 @@ function ProductsPage() {
               }}
             />
             <h4>Category</h4>
-            <Categories categories={categories} />
+            <Categories onChange={handleCategoryChange} value={category} />
             <h4>Company</h4>
-            <Companies onChange={handleChange} value={company} />
+            <Companies onChange={handleCompanyChange} value={company} />
             <h4>Price</h4>
             <p style={{ color: "#0056ad" }}>$ {price},00</p>
             <Box sx={{ width: 180 }}>
@@ -214,90 +193,32 @@ function ProductsPage() {
             <div id="products">
               {!isListView ? (
                 <ProductList
+                  searchTerm={searchTerm}
+                  price={price}
+                  category={category}
                   products={
                     sortCondition === "high-price"
-                      ? products
-                          .filter((product) => {
-                            if (searchTerm === "") {
-                              return product.price <= price && category
-                                ? product.category === category
-                                : product.price <= price;
-                            } else if (
-                              product.title
-                                .toLocaleLowerCase()
-                                .includes(searchTerm.toLocaleLowerCase())
-                            ) {
-                              return product.price <= price && category
-                                ? product.category === category
-                                : product.price <= price;
-                            }
-                          })
-                          .sort(function (a: any, b: any) {
-                            return b.price - a.price;
-                          })
-                      : products
-                          .filter((product) => {
-                            if (searchTerm === "") {
-                              return product.price <= price && category
-                                ? product.category === category
-                                : product.price <= price;
-                            } else if (
-                              product.title
-                                .toLocaleLowerCase()
-                                .includes(searchTerm.toLocaleLowerCase())
-                            ) {
-                              return product.price <= price && category
-                                ? product.category === category
-                                : product.price <= price;
-                            }
-                          })
-                          .sort(function (a: any, b: any) {
-                            return a.price - b.price;
-                          })
+                      ? products.sort(function (a: any, b: any) {
+                          return b.price - a.price;
+                        })
+                      : products.sort(function (a: any, b: any) {
+                          return a.price - b.price;
+                        })
                   }
                 />
               ) : (
                 <ListProductsView
+                  searchTerm={searchTerm}
+                  price={price}
+                  category={category}
                   products={
                     sortCondition === "high-price"
-                      ? products
-                          .filter((product) => {
-                            if (searchTerm === "") {
-                              return product.price <= price && category
-                                ? product.category === category
-                                : product.price <= price;
-                            } else if (
-                              product.title
-                                .toLocaleLowerCase()
-                                .includes(searchTerm.toLocaleLowerCase())
-                            ) {
-                              return product.price <= price && category
-                                ? product.category === category
-                                : product.price <= price;
-                            }
-                          })
-                          .sort(function (a: any, b: any) {
-                            return b.price - a.price;
-                          })
-                      : products
-                          .filter((product) => {
-                            if (searchTerm === "") {
-                              return product.price <= price && category
-                                ? product.category === category
-                                : product.price <= price;
-                            } else if (
-                              product.title
-                                .toLocaleLowerCase()
-                                .includes(searchTerm.toLocaleLowerCase())
-                            ) {
-                              return product.price <= price && category
-                                ? product.category === category
-                                : product.price <= price;
-                            }
-                          })
-                          .sort(function (a: any, b: any) {
-                            return a.price - b.price;
-                          })
+                      ? products.sort(function (a: any, b: any) {
+                          return b.price - a.price;
+                        })
+                      : products.sort(function (a: any, b: any) {
+                          return a.price - b.price;
+                        })
                   }
                 />
               )}

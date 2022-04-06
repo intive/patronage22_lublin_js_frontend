@@ -1,7 +1,12 @@
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import React from "react";
 
-function SearchBar(props: any) {
+interface SearchProsp {
+  onChange: (e: React.ChangeEvent) => void;
+}
+
+function SearchBar(props: SearchProsp) {
   return (
     <Box
       sx={{
