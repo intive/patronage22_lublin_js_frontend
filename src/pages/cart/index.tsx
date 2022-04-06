@@ -1,9 +1,9 @@
 function CartPage() {
   return (
     <section>
-      <h3>
+      <h2>
         Home <span className="location"> {">"} Cart</span>
-      </h3>
+      </h2>
     </section>
   );
 }
