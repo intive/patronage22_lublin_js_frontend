@@ -7,20 +7,21 @@ function ProductDetails({
   productData,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
-      <h1>
+    <section>
+      <h2>
         Home {">"} Products{" "}
         <span className="location">
           {" "}
           {">"} {productData.title}
         </span>
-      </h1>
+      </h2>
       <ProductDetail
         title={productData.title}
         description={productData.description}
         photos={productData.photos}
+        // price={props.productData.price}
       />
-    </>
+    </section>
   );
 }
 
@@ -47,6 +48,8 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         title: selectedProduct.title,
         description: selectedProduct.description,
         photos: selectedProduct.photos[0].url,
+        price:selectedProduct.price
+        // photos: selectedProduct.photos[0].url,
       },
     },
   };

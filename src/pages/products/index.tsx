@@ -126,7 +126,7 @@ function ProductsPage() {
 
   return (
     <section>
-      <h3>
+      <h2>
         Home <span className="location"> {">"} Products</span>
       </h3>
       <Box sx={{ marginTop: 5 }}>

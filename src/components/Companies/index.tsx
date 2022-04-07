@@ -9,7 +9,6 @@ interface CompanyProsp {
 
 function Companies(props: CompanyProsp) {
   const companies = ["All", "Apple", "Android"];
-
   return (
     <FormControl sx={{ minWidth: 180 }}>
       <Select
