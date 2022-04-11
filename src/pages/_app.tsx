@@ -1,17 +1,20 @@
 import "../styles/globals.css";
 import Layout from "../components/Layout";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from '@mui/material/styles';
-import theme from '../styles/theme';
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../styles/theme";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-
-    <ThemeProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

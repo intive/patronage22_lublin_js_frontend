@@ -3,6 +3,7 @@ import axios from "axios";
 import { ThunkAction } from "redux-thunk";
 import { AnyAction } from "redux";
 import { RootState } from "../store";
+import { CONSTANTS } from "../constants";
 
 export const login =
   (
@@ -22,7 +23,7 @@ export const login =
       };
 
       const { data } = await axios.post(
-        "/api/auth/login",
+        `${CONSTANTS.URL}/api/auth/login`,
         { email, password },
         config
       );
@@ -32,7 +33,9 @@ export const login =
         payload: data,
       });
 
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userInfo", JSON.stringify(data));
+      }
     } catch (error: any) {
       dispatch({
         type: constants.USER_LOGIN_FAIL,
@@ -78,7 +81,9 @@ export const register =
         payload: data,
       });
 
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userInfo", JSON.stringify(data));
+      }
     } catch (error: any) {
       dispatch({
         type: constants.USER_REGISTER_FAIL,
@@ -88,4 +93,12 @@ export const register =
             : error.message,
       });
     }
+  };
+
+export const logout =
+  (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch) => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("userInfo");
+    }
+    dispatch({ type: constants.USER_LOGOUT });
   };

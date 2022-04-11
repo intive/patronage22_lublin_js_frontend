@@ -5,15 +5,20 @@ import {
   userLoginReducer,
   userRegisterReducer,
 } from "../reducers/userReducers";
+import { useEffect } from "react";
 
 const rootReducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
 });
 
-const userInfoFromStorage = localStorage.getItem("userInfo")
-  ? JSON.stringify(localStorage.getItem("userInfo"))
-  : null;
+let userInfoFromStorage;
+
+if (typeof window !== "undefined") {
+  userInfoFromStorage = localStorage.getItem("userInfo")
+    ? JSON.stringify(localStorage.getItem("userInfo"))
+    : null;
+}
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },

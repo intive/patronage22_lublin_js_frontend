@@ -1,7 +1,10 @@
 import { FormControl, FormLabel, FormHelperText, Input } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Formik, Form } from "formik";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/userActions";
+import { useRouter } from "next/router";
 
 interface MyFormValues {
   email: string;
@@ -12,8 +15,25 @@ function LoginForm() {
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const userLogin = useSelector((state: any) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/");
+    }
+  }, [router, userInfo]);
+
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
+
+    const enteredEmail = emailInputRef.current!.value;
+    const enteredPassword = passwordInputRef.current!.value;
+
+    dispatch(login(enteredEmail, enteredPassword));
 
     console.log("Submitted!");
   };
@@ -22,6 +42,8 @@ function LoginForm() {
 
   return (
     <section className="container">
+      {error && <p>{error}</p>}
+      {loading && <p>Loading...</p>}
       <Formik
         initialValues={initialValues}
         onSubmit={(values, actions) => {
@@ -60,7 +82,7 @@ function LoginForm() {
           </FormControl>
 
           <div className="actions">
-            <button>Login</button>
+            <button>{loading ? "Loading..." : "Login"}</button>
           </div>
           <p>
             New Customer? <Link href="/register">Register</Link>

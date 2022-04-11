@@ -14,16 +14,20 @@ import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FaceIcon from "@mui/icons-material/Face";
-import Image from 'next/image'
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../actions/userActions";
 
-
-const pages = ["Home", "About", "Products",];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Home", "About", "Products"];
+const settings = ["Profile", "Account", "Dashboard"];
 
 const MainNavigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [userLogged, setUserLogged] = React.useState(false);
+
+  const userLogin = useSelector((state: any) => state.userLogin);
+  const { userInfo } = userLogin;
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -41,8 +45,8 @@ const MainNavigation = () => {
   };
 
   return (
-    <AppBar position="static" className="app-bar"  sx={{ mt:3}}>
-      <Container maxWidth="lg" >
+    <AppBar position="static" className="app-bar">
+      <Container maxWidth="lg" sx={{ mt: 3 }}>
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -50,15 +54,12 @@ const MainNavigation = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "block" } }}
           >
-            <Image
-              src="/logo.svg"
-              alt="Logo"
-              width={45}
-              height={45}
-            />
-             <Typography variant='subtitle2' color='#0057D8'lineHeight={1}>e-shop</Typography>
+            <WhatshotIcon sx={{ fontSize: 50, color: "#0057D8" }} />
+            <Typography variant="subtitle2" color="#0057D8" lineHeight={1}>
+              e-shop
+            </Typography>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none"} }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -103,18 +104,15 @@ const MainNavigation = () => {
             </Menu>
             <Typography
               variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "block", md: "none" } }}
-          >
-            <Image
-              src="/logo.svg"
-              alt="Logo"
-              width={40}
-              height={40}
-            />
-             <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>e-shop</Typography>
-          </Typography>
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: "block", md: "none" } }}
+            >
+              <WhatshotIcon sx={{ fontSize: 50, color: "#0057D8" }} />
+              <Typography variant="subtitle2" color="#0057D8" lineHeight={1}>
+                e-shop
+              </Typography>
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -139,10 +137,13 @@ const MainNavigation = () => {
             ))}
           </Box>
 
-          {userLogged ? (
+          {userInfo ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ size:'medium', p: 0 }}>
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ size: "medium", p: 0 }}
+                >
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
@@ -167,6 +168,14 @@ const MainNavigation = () => {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
+                <MenuItem
+                  key="Logout"
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           ) : (
@@ -189,4 +198,3 @@ const MainNavigation = () => {
   );
 };
 export default MainNavigation;
-
