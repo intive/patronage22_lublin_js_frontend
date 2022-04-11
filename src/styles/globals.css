@@ -45,6 +45,9 @@ h1 {
   margin: 2.5rem 0;
 }
 
+
+section{margin-top:100px}
+
 /* Header */
 .app-bar {
   background-color: transparent;
