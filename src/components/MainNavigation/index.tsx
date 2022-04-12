@@ -42,7 +42,7 @@ const MainNavigation = () => {
 
   return (
     <AppBar position="static" className="app-bar">
-      <Container maxWidth="lg" sx={{ mt:3}} >
+      <Container maxWidth="lg" sx={{ mt: 3 }} >
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -50,10 +50,10 @@ const MainNavigation = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "block" } }}
           >
-<WhatshotIcon sx={{ fontSize: 50, color:'#0057D8' }}/>
-             <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>e-shop</Typography>
+            <WhatshotIcon sx={{ fontSize: 50, color: '#0057D8' }} />
+            <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>e-shop</Typography>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none"} }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -98,13 +98,13 @@ const MainNavigation = () => {
             </Menu>
             <Typography
               variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "block", md: "none" } }}
-          >
-            <WhatshotIcon sx={{ fontSize: 50, color:'#0057D8' }}/>
-             <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>e-shop</Typography>
-          </Typography>
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: "block", md: "none" } }}
+            >
+              <WhatshotIcon sx={{ fontSize: 50, color: '#0057D8' }} />
+              <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>e-shop</Typography>
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -132,7 +132,7 @@ const MainNavigation = () => {
           {userLogged ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ size:'medium', p: 0 }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{ size: 'medium', p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
