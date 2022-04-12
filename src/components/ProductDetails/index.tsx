@@ -17,6 +17,7 @@ const CustomText = styled(Typography)(({ theme }) => ({
 
 
 interface ProductDetailProps {
+  price: string;
   photos: string;
   title: string;
   description: string;
