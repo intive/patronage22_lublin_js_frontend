@@ -25,6 +25,10 @@ h6 {
   color: #102a42;
 }
 
+.select {
+  height: 30px;
+}
+
 /* Main */
 .main {
   margin: 2rem auto;
@@ -41,8 +45,9 @@ h1 {
   margin: 2.5rem 0;
 }
 
-
-section{margin-top:100px}
+section {
+  margin-top: 100px;
+}
 
 /* Header */
 .app-bar {
@@ -149,11 +154,21 @@ section{margin-top:100px}
   margin: 0 1.5rem 1.5rem 0;
 }
 
-.active {
-  border: 2px solid 
-  var(--color-primary) ; 
+.category-item {
+  font-size: 14rem;
+  color: #0056ad;
+  cursor: pointer;
 }
- 
+
+.category-list {
+  margin-top: -1rem;
+  margin-left: -1rem;
+}
+
+.active {
+  border: 2px solid var(--color-primary);
+}
+
 .category-item.active {
   text-decoration: underline;
 }

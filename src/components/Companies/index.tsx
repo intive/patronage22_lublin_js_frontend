@@ -1,24 +1,30 @@
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-function Companies(props: any) {
+interface CompanyProsp {
+  value: string;
+  onChange: (event: SelectChangeEvent<string>) => void;
+}
+
+function Companies(props: CompanyProsp) {
+  const companies = ["All", "Apple", "Android"];
   return (
     <FormControl sx={{ minWidth: 180 }}>
       <Select
         displayEmpty
         id="demo-controlled-open-select"
         value={props.value}
-        label="Age"
+        label="Company"
         onChange={props.onChange}
-        style={{ height: 30 }}
+        className="select"
       >
         <MenuItem disabled value="">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={"all"}>All</MenuItem>
-        <MenuItem value={"apple"}>Apple</MenuItem>
-        <MenuItem value={"android"}>Android</MenuItem>
+        {companies.map((company) => {
+          return <MenuItem value={company}>{company}</MenuItem>;
+        })}
       </Select>
     </FormControl>
   );
