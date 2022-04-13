@@ -5,25 +5,17 @@ import {
   userLoginReducer,
   userRegisterReducer,
 } from "../reducers/userReducers";
-import { useEffect } from "react";
+import { userData } from "../actions/userActions";
 
 const rootReducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
 });
 
-let userInfoFromStorage;
-
-if (typeof window !== "undefined") {
-  userInfoFromStorage = localStorage.getItem("userInfo")
-    ? JSON.stringify(localStorage.getItem("userInfo"))
-    : null;
-}
-
 const initialState = {
-  userLogin: { userInfo: userInfoFromStorage },
+  userLogin: { userInfo: userData },
 };
-
+console.log(userData);
 const middleware = [thunk];
 
 export const store = createStore(

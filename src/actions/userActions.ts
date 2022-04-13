@@ -1,9 +1,10 @@
 import * as constants from "../constants/userConstants";
-import axios from "axios";
 import { ThunkAction } from "redux-thunk";
 import { AnyAction } from "redux";
 import { RootState } from "../store";
-import { CONSTANTS } from "../constants";
+import { loginUserRequest, registerUserRequest } from "../lib/authorization";
+
+export let userData: null;
 
 export const login =
   (
@@ -16,26 +17,14 @@ export const login =
         type: constants.USER_LOGIN_REQUEST,
       });
 
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-      const { data } = await axios.post(
-        `${CONSTANTS.URL}/api/auth/login`,
-        { email, password },
-        config
-      );
+      const data = (await loginUserRequest(email, password)).data;
 
       dispatch({
         type: constants.USER_LOGIN_SUCCESS,
         payload: data,
       });
 
-      if (typeof window !== "undefined") {
-        localStorage.setItem("userInfo", JSON.stringify(data));
-      }
+      userData = data;
     } catch (error: any) {
       dispatch({
         type: constants.USER_LOGIN_FAIL,
@@ -59,17 +48,7 @@ export const register =
         type: constants.USER_REGISTER_REQUEST,
       });
 
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-      const { data } = await axios.post(
-        "/api/auth/register",
-        { name, email, password },
-        config
-      );
+      const data = (await registerUserRequest(name, email, password)).data;
 
       dispatch({
         type: constants.USER_REGISTER_SUCCESS,
@@ -81,9 +60,7 @@ export const register =
         payload: data,
       });
 
-      if (typeof window !== "undefined") {
-        localStorage.setItem("userInfo", JSON.stringify(data));
-      }
+      userData = data;
     } catch (error: any) {
       dispatch({
         type: constants.USER_REGISTER_FAIL,
@@ -97,8 +74,6 @@ export const register =
 
 export const logout =
   (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch) => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("userInfo");
-    }
+    userData = null;
     dispatch({ type: constants.USER_LOGOUT });
   };

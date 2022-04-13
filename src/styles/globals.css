@@ -45,8 +45,9 @@ h1 {
   margin: 2.5rem 0;
 }
 
-
-section{margin-top:100px}
+section {
+  margin-top: 100px;
+}
 
 /* Header */
 .app-bar {
@@ -162,4 +163,9 @@ section{margin-top:100px}
   font-size: 14rem;
   color: #0056ad;
   cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
 }
