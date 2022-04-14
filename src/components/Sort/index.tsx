@@ -1,8 +1,13 @@
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-function Sort(props: any) {
+interface SortProsp {
+  value: string;
+  onChange: (event: SelectChangeEvent<string>) => void;
+}
+
+function Sort(props: SortProsp) {
   return (
     <FormControl sx={{ minWidth: 180 }}>
       <Select

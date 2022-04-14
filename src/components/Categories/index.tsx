@@ -1,22 +1,40 @@
-import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import React from "react";
 
-function Categories(props: any) {
+interface CategoryProsp {
+  value: string;
+  onChange: (event: SelectChangeEvent<string>) => void;
+}
+
+function Categories(props: CategoryProsp) {
+  const categories = [
+    "Books",
+    "Clothing",
+    "Furnitures",
+    "Accessorries",
+    "Jewelery",
+  ];
+
   return (
-    <List style={{ marginTop: "-1rem", marginLeft: "-1rem" }}>
-      {props.categories.map((category: any) => (
-        <ListItem className="category-item">
-          <Typography
-            sx={{ fontSize: 14, color: "#0056ad", cursor: "pointer" }}
-            gutterBottom
-            component="div"
-          >
-            {category}
-          </Typography>
-        </ListItem>
-      ))}
-    </List>
+    <FormControl sx={{ minWidth: 180 }}>
+      <Select
+        displayEmpty
+        id="demo-controlled-open-select"
+        value={props.value}
+        label="Category"
+        onChange={props.onChange}
+        className="select"
+      >
+        <MenuItem value="">
+          <em>All</em>
+        </MenuItem>
+        {categories.map((category) => {
+          return <MenuItem value={category}>{category}</MenuItem>;
+        })}
+      </Select>
+    </FormControl>
   );
 }
 
