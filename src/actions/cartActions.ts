@@ -4,10 +4,14 @@ import { AnyAction } from "redux";
 import { RootState } from "../store";
 import { loadProductDetails } from "../lib/products";
 
+export let userCart: [];
+export let userShippingAddress: {};
+export let userPaymentMethod: {};
+
 export const addToCart =
   (id: any): ThunkAction<void, RootState, unknown, AnyAction> =>
   async (dispatch, getState) => {
-    const { data } = await loadProductDetails(id);
+    const data = await loadProductDetails(id);
 
     dispatch({
       type: constants.CART_ADD_ITEM,
@@ -21,12 +25,7 @@ export const addToCart =
       },
     });
 
-    if (typeof window !== "undefined") {
-      localStorage.setItem(
-        "cartItems",
-        JSON.stringify(getState().cart.cartItems)
-      );
-    }
+    userCart = getState().cart.cartItems;
   };
 
 export const removeFromCart =
@@ -37,12 +36,7 @@ export const removeFromCart =
       payload: id,
     });
 
-    if (typeof window !== "undefined") {
-      localStorage.setItem(
-        "cartItems",
-        JSON.stringify(getState().cart.cartItems)
-      );
-    }
+    userCart = getState().cart.cartItems;
   };
 
 export const saveShippingAddress =
@@ -53,9 +47,7 @@ export const saveShippingAddress =
       payload: data,
     });
 
-    if (typeof window !== "undefined") {
-      localStorage.setItem("shippingAddress", JSON.stringify(data));
-    }
+    userShippingAddress = data;
   };
 
 export const savePaymentMethod =
@@ -66,7 +58,5 @@ export const savePaymentMethod =
       payload: data,
     });
 
-    if (typeof window !== "undefined") {
-      localStorage.setItem("paymentMethod", JSON.stringify(data));
-    }
+    userPaymentMethod = data;
   };
