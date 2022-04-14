@@ -1,7 +1,8 @@
 import { FormControl, FormLabel, FormHelperText, Input } from "@mui/material";
-import React, { useRef } from "react";
-import { Formik, Form } from "formik";
+import React from "react";
+import { useFormik } from "formik";
 import Link from "next/link";
+import * as Yup from "yup";
 
 interface MyFormValues {
   name: string;
@@ -10,76 +11,81 @@ interface MyFormValues {
 }
 
 function RegisterForm() {
-  const nameInputRef = useRef<HTMLInputElement>(null);
-  const emailInputRef = useRef<HTMLInputElement>(null);
-  const passwordInputRef = useRef<HTMLInputElement>(null);
-
-  const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    console.log("Submitted!");
+  const initialValuesForm: MyFormValues = {
+    name: "",
+    email: "",
+    password: "",
   };
 
-  const initialValues: MyFormValues = { name: "", email: "", password: "" };
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().max(255).required("Name is required"),
+    email: Yup.string()
+      .email("Must be a valid email")
+      .max(255)
+      .required("Email is required"),
+    password: Yup.string().max(255).required("Password is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: initialValuesForm,
+    onSubmit(values) {
+      const payload = { ...values };
+      console.log(payload);
+    },
+    validationSchema,
+  });
+
+  const { handleSubmit, getFieldProps, errors } = formik;
 
   return (
     <section className="container">
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values, actions) => {
-          console.log({ values, actions });
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }}
-      >
-        <Form onSubmit={submitHandler} className="form">
-          <h1>Register</h1>
-          <FormControl>
-            <FormLabel htmlFor="name">Your name</FormLabel>
-            <Input
-              id="name"
-              type="text"
-              name="name"
-              placeholder="Enter name"
-              inputRef={nameInputRef}
-              required
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel htmlFor="email">Email address</FormLabel>
-            <Input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Enter email"
-              inputRef={emailInputRef}
-              required
-            />
-            <FormHelperText>
-              We'll never share your email with anyone else.
-            </FormHelperText>
-          </FormControl>
+      <form onSubmit={handleSubmit} className="form">
+        <h1>Register</h1>
+        <FormControl>
+          <FormLabel htmlFor="name">Your name</FormLabel>
+          <Input
+            id="name"
+            type="text"
+            placeholder="Enter name"
+            {...getFieldProps("name")}
+            required
+          />
+          {errors.name && <p className="error">{errors.name}</p>}
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="email">Email address</FormLabel>
+          <Input
+            id="email"
+            type="email"
+            placeholder="Enter email"
+            {...getFieldProps("email")}
+            required
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+          <FormHelperText>
+            We'll never share your email with anyone else.
+          </FormHelperText>
+        </FormControl>
 
-          <FormControl>
-            <FormLabel htmlFor="password">Password</FormLabel>
-            <Input
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Password"
-              inputRef={passwordInputRef}
-              required
-            />
-          </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <Input
+            id="password"
+            type="password"
+            placeholder="Password"
+            {...getFieldProps("password")}
+            required
+          />
+          {errors.password && <p className="error">{errors.password}</p>}
+        </FormControl>
 
-          <div className="actions">
-            <button>Register</button>
-          </div>
-          <p>
-            Already have an account? <Link href="/login">Login</Link>
-          </p>
-        </Form>
-      </Formik>
+        <div className="actions">
+          <button>Register</button>
+        </div>
+        <p>
+          Already have an account? <Link href="/login">Login</Link>
+        </p>
+      </form>
     </section>
   );
 }
