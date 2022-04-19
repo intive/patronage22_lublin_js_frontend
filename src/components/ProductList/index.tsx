@@ -9,7 +9,7 @@ interface ProductListProps {
 
 function ProductList(props: ProductListProps) {
   return (
-    <ul className="list">
+    <ul className='list'>
       {props.products
         .filter((product) => {
           if (props.searchTerm === "") {

@@ -2,36 +2,34 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import React from "react";
+import { Category } from "../../types/models";
 
 interface CategoryProsp {
-  value: string;
+  categoriesList: Category[];
+  selectedCategory: string;
   onChange: (event: SelectChangeEvent<string>) => void;
 }
 
 function Categories(props: CategoryProsp) {
-  const categories = [
-    "Books",
-    "Clothing",
-    "Furnitures",
-    "Accessorries",
-    "Jewelery",
-  ];
-
   return (
     <FormControl sx={{ minWidth: 180 }}>
       <Select
         displayEmpty
-        id="demo-controlled-open-select"
-        value={props.value}
-        label="Category"
+        id='demo-controlled-open-select'
+        label='Category'
+        value={props.selectedCategory}
         onChange={props.onChange}
-        className="select"
+        className='select'
       >
-        <MenuItem value="">
-          <em>All</em>
+        <MenuItem key={0} value=''>
+          All
         </MenuItem>
-        {categories.map((category) => {
-          return <MenuItem value={category}>{category}</MenuItem>;
+        {props.categoriesList.map((category) => {
+          return (
+            <MenuItem key={category.id} value={category.title}>
+              {category.title}
+            </MenuItem>
+          );
         })}
       </Select>
     </FormControl>
