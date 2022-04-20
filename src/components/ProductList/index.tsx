@@ -4,7 +4,7 @@ interface ProductListProps {
   products: any[];
   searchTerm: string;
   price: number;
-  category: string;
+  category: number;
 }
 
 function ProductList(props: ProductListProps) {
@@ -13,7 +13,7 @@ function ProductList(props: ProductListProps) {
       {props.products
         .filter((product) => {
           if (props.searchTerm === "") {
-            return product.price <= props.price && props.category !== ""
+            return product.price <= props.price && props.category !== 0
               ? product.category === props.category
               : product.price <= props.price;
           } else if (
@@ -21,7 +21,7 @@ function ProductList(props: ProductListProps) {
               .toLocaleLowerCase()
               .includes(props.searchTerm.toLocaleLowerCase())
           ) {
-            return product.price <= props.price && props.category !== ""
+            return product.price <= props.price && props.category !== 0
               ? product.category === props.category
               : product.price <= props.price;
           }

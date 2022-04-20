@@ -22,7 +22,7 @@ const products = [
     title: "Pierwszy produkt",
     price: 1499.99,
     description: "Opis proiduktu",
-    category: "Komputery",
+    category: 1,
     photos:
       "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80",
   },
@@ -31,7 +31,7 @@ const products = [
     title: "Drugi produkt",
     price: 105.99,
     description: "First Prod",
-    category: "Interesting Books",
+    category: 2,
     photos:
       "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80",
   },
@@ -40,7 +40,7 @@ const products = [
     title: "Trzeci produkt",
     price: 59.99,
     description: "Sec Prod",
-    category: "Interesting Books",
+    category: 3,
     photos:
       "https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80",
   },
@@ -49,7 +49,7 @@ const products = [
     title: "Czwarty produkt",
     price: 10229.5,
     description: "Opis proiduktu",
-    category: "Flowers",
+    category: 2,
     photos:
       "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80",
   },
@@ -57,7 +57,7 @@ const products = [
     id: 5,
     title: "Piąty produkt",
     price: 5000.99,
-    category: "Komputery",
+    category: 1,
     description: "First Prod",
     photos:
       "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80",
@@ -67,7 +67,7 @@ const products = [
     title: "Szósty produkt",
     price: 2499.89,
     description: "Sec Prod",
-    category: "Flowers",
+    category: 3,
     photos:
       "https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80",
   },
@@ -105,7 +105,7 @@ function ProductsPage({ categories }: ProductPageProps) {
   const [isListView, setListView] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [categoriesList, setCategoriesList] = useState<Category[]>(categories);
-  const [category, setCategory] = useState<string>("");
+  const [category, setCategory] = useState<number>(0);
 
   const handleSliderChange = (event: any, newValue: any) => {
     setPrice(newValue);
@@ -115,8 +115,8 @@ function ProductsPage({ categories }: ProductPageProps) {
     setCompany(event.target.value);
   };
 
-  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    setCategory(event.target.value);
+  const handleCategoryChange = (event: SelectChangeEvent<number | null>) => {
+    setCategory(event.target.value as number);
   };
 
   const handleSortChange = (event: SelectChangeEvent<string>) => {
@@ -135,9 +135,8 @@ function ProductsPage({ categories }: ProductPageProps) {
     setPrice(maxPrice);
     setSortCondition("");
     setSearchTerm("");
-    setCategory("");
+    setCategory(0);
   };
-
   return (
     <section>
       <h2>
@@ -268,15 +267,15 @@ export const getStaticProps: GetStaticProps = async () => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const categories = await loadCategories();
+
   return {
     props: {
-      categories: categories.map((category: any) => ({
-        id: category.id,
-        title: category.title,
-        description: category.description,
-        createdAt: category.createdAt,
-        updatedAt: category.updatedAt,
-      })),
+      categories:
+        categories?.map((category: Category) => ({
+          id: category.id,
+          title: category.title,
+          description: category.description,
+        })) || [],
     },
   };
 };

@@ -6,8 +6,8 @@ import { Category } from "../../types/models";
 
 interface CategoryProsp {
   categoriesList: Category[];
-  selectedCategory: string;
-  onChange: (event: SelectChangeEvent<string>) => void;
+  selectedCategory: number;
+  onChange: (event: SelectChangeEvent<number>) => void;
 }
 
 function Categories(props: CategoryProsp) {
@@ -17,16 +17,20 @@ function Categories(props: CategoryProsp) {
         displayEmpty
         id='demo-controlled-open-select'
         label='Category'
-        value={props.selectedCategory}
+        value={
+          props.categoriesList.find(
+            (category) => category.id === props.selectedCategory
+          )?.id || 0
+        }
         onChange={props.onChange}
         className='select'
       >
-        <MenuItem key={0} value=''>
+        <MenuItem key={0} value={0}>
           All
         </MenuItem>
         {props.categoriesList.map((category) => {
           return (
-            <MenuItem key={category.id} value={category.title}>
+            <MenuItem key={category.id} value={category.id}>
               {category.title}
             </MenuItem>
           );
