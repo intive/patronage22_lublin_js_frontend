@@ -1,7 +1,9 @@
+import { CONSTANTS } from "../../types/constants";
+import { Product } from "../../types/models";
 import ProductItem from "../ProductItem";
 
 interface ProductListProps {
-  products: any[];
+  products: Product[];
   searchTerm: string;
   price: number;
   category: number;
@@ -14,7 +16,7 @@ function ProductList(props: ProductListProps) {
         .filter((product) => {
           if (props.searchTerm === "") {
             return product.price <= props.price && props.category !== 0
-              ? product.category === props.category
+              ? product.categoryId === props.category
               : product.price <= props.price;
           } else if (
             product.title
@@ -22,7 +24,7 @@ function ProductList(props: ProductListProps) {
               .includes(props.searchTerm.toLocaleLowerCase())
           ) {
             return product.price <= props.price && props.category !== 0
-              ? product.category === props.category
+              ? product.categoryId === props.category
               : product.price <= props.price;
           }
         })
@@ -30,7 +32,11 @@ function ProductList(props: ProductListProps) {
           <ProductItem
             key={product.id}
             id={product.id}
-            photos={product.photos}
+            photos={
+              product.photos?.length
+                ? `${CONSTANTS.URL}/${product.photos[0].url}`
+                : undefined
+            }
             title={product.title}
             description={product.description}
             price={product.price}

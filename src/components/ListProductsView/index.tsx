@@ -6,9 +6,11 @@ import Box from "@mui/material/Box";
 import { useRouter } from "next/router";
 import MainButton from "../MainButton";
 import { Item, CustomIcon, CustomContainer } from "../../styles/styles";
+import { Product } from "../../types/models";
+import { CONSTANTS } from "../../types/constants";
 
 interface ProductListProps {
-  products: any[];
+  products: Product[];
   searchTerm: string;
   price: number;
   category: number;
@@ -24,7 +26,7 @@ function ListProductsView(props: ProductListProps) {
           .filter((product) => {
             if (props.searchTerm === "") {
               return product.price <= props.price && props.category !== 0
-                ? product.category === props.category
+                ? product.categoryId === props.category
                 : product.price <= props.price;
             } else if (
               product.title
@@ -32,7 +34,7 @@ function ListProductsView(props: ProductListProps) {
                 .includes(props.searchTerm.toLocaleLowerCase())
             ) {
               return product.price <= props.price && props.category !== 0
-                ? product.category === props.category
+                ? product.categoryId === props.category
                 : product.price <= props.price;
             }
           })
@@ -42,7 +44,11 @@ function ListProductsView(props: ProductListProps) {
                 <CardMedia
                   component='img'
                   alt={product.title}
-                  image={product.photos}
+                  image={
+                    product.photos?.length
+                      ? `${CONSTANTS.URL}/${product.photos[0].url}`
+                      : undefined
+                  }
                   sx={{
                     transition: "all 0.3s linear",
                     width: "250px",

@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import { Box, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { CONSTANTS } from "../../types/constants";
 
 const CustomIcon = styled(IconButton)(({ theme }) => ({
   position: "absolute",
@@ -44,7 +45,7 @@ const CustomContainer = styled(Box)(({ theme }) => ({
 
 interface ProductItemProps {
   id: number;
-  photos: string;
+  photos?: string;
   title: string;
   description: string;
   price: number;
@@ -58,11 +59,11 @@ function ProductItem(props: ProductItemProps) {
   }
 
   return (
-    <div className="item">
+    <div className='item'>
       <Card>
         <CustomContainer>
           <CardMedia
-            component="img"
+            component='img'
             alt={props.title}
             image={props.photos}
             sx={{ transition: "all 0.3s linear" }}
@@ -78,15 +79,15 @@ function ProductItem(props: ProductItemProps) {
         </CustomContainer>
         <CardContent>
           <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="flex-start"
+            direction='row'
+            justifyContent='space-between'
+            alignItems='flex-start'
             spacing={2}
           >
-            <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
+            <Typography sx={{ fontSize: 14 }} gutterBottom component='div'>
               {props.title}
             </Typography>
-            <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
+            <Typography sx={{ fontSize: 14 }} gutterBottom component='div'>
               {props.price}.00$
             </Typography>
           </Stack>

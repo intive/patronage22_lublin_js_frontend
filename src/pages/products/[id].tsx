@@ -2,6 +2,7 @@ import ProductDetail from "../../components/ProductDetails";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { InferGetStaticPropsType } from "next";
 import { loadProductDetails, loadProducts } from "../../lib/products";
+import { Product } from "../../types/models";
 
 function ProductDetails({
   productData,
@@ -25,30 +26,35 @@ function ProductDetails({
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const products = await loadProducts();
+export function mapEntriesSlugToPaths(entries: any[]) {
+  if (!entries.length) return [];
+  return entries.map((item) => ({ params: { id: item.id.toString() } }));
+}
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const products = (await loadProducts()) as Product[];
+  const paths = mapEntriesSlugToPaths(products);
   return {
-    fallback: "blocking",
-    paths: products.map((product: any) => ({
-      params: { productId: product.id.toString() },
-    })),
+    paths,
+    fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps = async (context: any) => {
-  const productId = context.params.productId;
+  const productId = context.params.id;
 
-  const selectedProduct = await loadProductDetails(productId);
+  const selectedProduct = (await loadProductDetails(productId)) as Product;
+
+  const { id, title, description, price, photos } = selectedProduct;
 
   return {
     props: {
       productData: {
-        id: selectedProduct.id.toString(),
-        title: selectedProduct.title,
-        description: selectedProduct.description,
-        photos: selectedProduct.photos[0].url,
-        price: selectedProduct.price,
+        id: id,
+        title: title,
+        description: description,
+        photos: photos,
+        price: price,
       },
     },
   };
