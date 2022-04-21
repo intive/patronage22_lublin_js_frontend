@@ -10,7 +10,7 @@ function ProductDetails({
     <section>
       <h2>
         Home {">"} Products{" "}
-        <span className="location">
+        <span className='location'>
           {" "}
           {">"} {productData.title}
         </span>
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
         title: selectedProduct.title,
         description: selectedProduct.description,
         photos: selectedProduct.photos[0].url,
-        price:selectedProduct.price
+        price: selectedProduct.price,
       },
     },
   };

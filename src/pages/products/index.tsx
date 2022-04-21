@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import ProductList from "../../components/ProductList";
-import { InferGetStaticPropsType } from "next";
 import { GetStaticProps } from "next";
-import { loadProducts } from "../../lib/products";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
@@ -15,6 +13,8 @@ import Categories from "../../components/Categories";
 import Companies from "../../components/Companies";
 import Sort from "../../components/Sort";
 import { SelectChangeEvent } from "@mui/material";
+import { getCategories } from "../../lib/categories";
+import { Category } from "../../types/models";
 
 const products = [
   {
@@ -22,7 +22,7 @@ const products = [
     title: "Pierwszy produkt",
     price: 1499.99,
     description: "Opis proiduktu",
-    category: "Books",
+    category: 1,
     photos:
       "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80",
   },
@@ -31,7 +31,7 @@ const products = [
     title: "Drugi produkt",
     price: 105.99,
     description: "First Prod",
-    category: "Clothing",
+    category: 2,
     photos:
       "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80",
   },
@@ -40,39 +40,52 @@ const products = [
     title: "Trzeci produkt",
     price: 59.99,
     description: "Sec Prod",
+    category: 3,
     photos:
       "https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80",
   },
   {
     id: 4,
-    title: "Pierwszy produkt",
+    title: "Czwarty produkt",
     price: 10229.5,
     description: "Opis proiduktu",
-    category: "Jewelery",
+    category: 2,
     photos:
       "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80",
   },
   {
     id: 5,
-    title: "Drugi produkt",
+    title: "Piąty produkt",
     price: 5000.99,
-    category: "Accessorries",
+    category: 1,
     description: "First Prod",
     photos:
       "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80",
   },
   {
     id: 6,
-    title: "Trzeci produkt",
+    title: "Szósty produkt",
     price: 2499.89,
     description: "Sec Prod",
-    category: "Furnitures",
+    category: 3,
     photos:
       "https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80",
   },
 ];
 
-function ProductsPage() {
+interface ProductPageProps {
+  categories: Category[];
+}
+
+const categoryAll: Category = {
+  id: 0,
+  title: "All",
+  description: "",
+  createdAt: "",
+  updatedAt: "",
+};
+
+function ProductsPage({ categories }: ProductPageProps) {
   const maxPrice = Math.max.apply(
     Math,
     products.map(function (o) {
@@ -91,7 +104,8 @@ function ProductsPage() {
   const [sortCondition, setSortCondition] = useState<string>("");
   const [isListView, setListView] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const [categoriesList, setCategoriesList] = useState<Category[]>(categories);
+  const [category, setCategory] = useState<number>(0);
 
   const handleSliderChange = (event: any, newValue: any) => {
     setPrice(newValue);
@@ -101,8 +115,8 @@ function ProductsPage() {
     setCompany(event.target.value);
   };
 
-  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    setCategory(event.target.value);
+  const handleCategoryChange = (event: SelectChangeEvent<number | null>) => {
+    setCategory(event.target.value as number);
   };
 
   const handleSortChange = (event: SelectChangeEvent<string>) => {
@@ -121,13 +135,12 @@ function ProductsPage() {
     setPrice(maxPrice);
     setSortCondition("");
     setSearchTerm("");
-    setCategory("");
+    setCategory(0);
   };
-
   return (
     <section>
       <h2>
-        Home <span className="location"> {">"} Products</span>
+        Home <span className='location'> {">"} Products</span>
       </h2>
       <Box sx={{ marginTop: 5 }}>
         <Grid container spacing={2}>
@@ -138,7 +151,11 @@ function ProductsPage() {
               }}
             />
             <h4>Category</h4>
-            <Categories onChange={handleCategoryChange} value={category} />
+            <Categories
+              onChange={handleCategoryChange}
+              categoriesList={categoriesList}
+              selectedCategory={category}
+            />
             <h4>Company</h4>
             <Companies onChange={handleCompanyChange} value={company} />
             <h4>Price</h4>
@@ -147,7 +164,7 @@ function ProductsPage() {
               <Slider
                 value={price}
                 onChange={handleSliderChange}
-                aria-labelledby="input-slider"
+                aria-labelledby='input-slider'
                 min={minPrice}
                 max={maxPrice}
                 step={100}
@@ -190,7 +207,7 @@ function ProductsPage() {
               <p style={{ marginRight: "0.5rem" }}>Sort By</p>
               <Sort onChange={handleSortChange} value={sortCondition} />
             </Box>
-            <div id="products">
+            <div id='products'>
               {!isListView ? (
                 <ProductList
                   searchTerm={searchTerm}
@@ -247,5 +264,20 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 */
+
+export const getStaticProps: GetStaticProps = async () => {
+  const categories = await getCategories();
+
+  return {
+    props: {
+      categories:
+        categories?.map((category: Category) => ({
+          id: category.id,
+          title: category.title,
+          description: category.description,
+        })) || [],
+    },
+  };
+};
 
 export default ProductsPage;
