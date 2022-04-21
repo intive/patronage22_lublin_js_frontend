@@ -13,7 +13,7 @@ import Categories from "../../components/Categories";
 import Companies from "../../components/Companies";
 import Sort from "../../components/Sort";
 import { SelectChangeEvent } from "@mui/material";
-import { loadCategories } from "../../lib/categories";
+import { getCategories } from "../../lib/categories";
 import { Category } from "../../types/models";
 
 const products = [
@@ -266,7 +266,7 @@ export const getStaticProps: GetStaticProps = async () => {
 */
 
 export const getStaticProps: GetStaticProps = async () => {
-  const categories = await loadCategories();
+  const categories = await getCategories();
 
   return {
     props: {

@@ -2,10 +2,18 @@ import axios from "axios";
 import { CONSTANTS } from "../types/constants";
 import { Category } from "../types/models";
 
-export async function loadCategories() {
+interface CategoryDataProps {
+  data: Category[];
+}
+interface CategoryDetailsProps {
+  data: Category;
+}
+
+export async function getCategories() {
   try {
-    const res = await axios.get(`${CONSTANTS.URL}/api/categories`);
-    const data: Category[] = await res.data;
+    const { data }: CategoryDataProps = await axios.get(
+      `${CONSTANTS.URL}/api/categories`
+    );
 
     return data;
   } catch (error) {
@@ -18,10 +26,9 @@ export async function loadCategories() {
 
 export async function loadCategoryDetails(categoryId: any) {
   try {
-    const res = await axios.get(
+    const { data }: CategoryDetailsProps = await axios.get(
       `${CONSTANTS.URL}/api/categories/${categoryId}`
     );
-    const data: Category = await res.data;
 
     return data;
   } catch (error) {

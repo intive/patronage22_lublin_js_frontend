@@ -11,6 +11,7 @@ interface CategoryProsp {
 }
 
 function Categories(props: CategoryProsp) {
+  const { categoriesList, selectedCategory, onChange } = props;
   return (
     <FormControl sx={{ minWidth: 180 }}>
       <Select
@@ -18,17 +19,16 @@ function Categories(props: CategoryProsp) {
         id='demo-controlled-open-select'
         label='Category'
         value={
-          props.categoriesList.find(
-            (category) => category.id === props.selectedCategory
-          )?.id || 0
+          categoriesList.find((category) => category.id === selectedCategory)
+            ?.id || 0
         }
-        onChange={props.onChange}
+        onChange={onChange}
         className='select'
       >
         <MenuItem key={0} value={0}>
           All
         </MenuItem>
-        {props.categoriesList.map((category) => {
+        {categoriesList?.map((category) => {
           return (
             <MenuItem key={category.id} value={category.id}>
               {category.title}
