@@ -18,10 +18,7 @@ function Categories(props: CategoryProsp) {
         displayEmpty
         id='demo-controlled-open-select'
         label='Category'
-        value={
-          categoriesList.find((category) => category.id === selectedCategory)
-            ?.id || 0
-        }
+        value={selectedCategory}
         onChange={onChange}
         className='select'
       >
