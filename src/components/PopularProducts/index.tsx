@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 import MainButton from "../MainButton";
 import Link from "next/link";
 import ProductItem from "../ProductItem";
+import {ProductItemProps} from '../ProductItem';
 
 
 
@@ -41,8 +42,8 @@ const Underline = styled('div')(({ theme }) => ({
     marginTop: '5px'
 }));
 
-function PopularProducts(props: any) {
-
+function PopularProducts(props: ProductItemProps) {
+    const { id, photos, title, description, price,url} = props;
     return (
         <Box sx={{ marginTop: 10, flexGrow: 1 }}>
             <Typography variant='h4' textAlign={'center'}>
@@ -60,7 +61,6 @@ function PopularProducts(props: any) {
                         key={product.id} 
                         justifyContent={'center'}>
                         <ProductItem 
-                      
                           id={product.id}
                             photos={product.photos}
                             title={product.title}

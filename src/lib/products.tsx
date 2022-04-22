@@ -1,20 +1,18 @@
 import axios from "axios";
-import { CONSTANTS } from "../constants";
+import { CONSTANTS } from "../types/constants";
+import { Product } from "../types/models";
 
 
-export interface Product {
-  id: number;
-  title: string;
-  price: string,
-  description: string,
-  category: string | null,
-  photos: string[],
-  url?:any,
+interface ProductsDataProps {
+  data: Product[];
 }
+interface ProductsDetailsProps {
+  data: Product;
+}
+
 export async function loadProducts() {
   try {
-    const res = await axios.get(`${CONSTANTS.apiURL}/api/products`);
-    const data: Product[] = await res.data;
+    const {data}:ProductsDataProps= await axios.get(`${CONSTANTS.URL}/api/products`);
 
     return data;
   } catch (error) {
@@ -27,10 +25,9 @@ export async function loadProducts() {
 
 export async function loadProductDetails(id: string) {
   try {
-    const res = await axios.get(
-      `${CONSTANTS.apiURL}/api/products/${id}`
+    const {data}:ProductsDetailsProps = await axios.get(
+      `${CONSTANTS.URL}/api/products/${id}`
     );
-    const data: Product = await res.data;
 
     return data;
   } catch (error) {

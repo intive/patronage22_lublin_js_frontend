@@ -4,39 +4,43 @@ interface ProductListProps {
   products: any[];
   searchTerm: string;
   price: number;
-  category: string;
-  
+  category: number;
 }
 
 function ProductList(props: ProductListProps) {
   return (
-    <ul className="list">
+    <ul className='list'>
       {props.products
         .filter((product) => {
+          const { title, price, category } = product;
           if (props.searchTerm === "") {
-            return product.price <= props.price && props.category !== ""
-              ? product.category === props.category
-              : product.price <= props.price;
+            return price <= props.price && props.category !== 0
+              ? category === props.category
+              : price <= props.price;
           } else if (
-            product.title
+            title
               .toLocaleLowerCase()
               .includes(props.searchTerm.toLocaleLowerCase())
           ) {
-            return product.price <= props.price && props.category !== ""
-              ? product.category === props.category
-              : product.price <= props.price;
+            return price <= props.price && props.category !== 0
+              ? category === props.category
+              : price <= props.price;
           }
         })
-        .map((product) => (
-          <ProductItem
-            key={product.id}
-            id={product.id}
-            photos={product.photos}
-            title={product.title}
-            description={product.description}
-            price={product.price}
-          />
-        ))}
+        .map((product) => {
+          const { id, photos, title, description, price } = product;
+
+          return (
+            <ProductItem
+              key={id}
+              id={id}
+              photos={photos}
+              title={title}
+              description={description}
+              price={price}
+            />
+          );
+        })}
     </ul>
   );
 }

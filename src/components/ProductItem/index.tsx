@@ -43,9 +43,9 @@ const CustomContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-interface ProductItemProps {
+export interface ProductItemProps {
   id: number;
-  photos: string;
+  photos: [];
   title: string;
   description: string;
   price: number;
@@ -67,8 +67,8 @@ function ProductItem(props: ProductItemProps) {
           <CardMedia
             component="img"
             alt={title}
-            // image={getImageUrl(photos)}
-            image={photos}
+            image={getImageUrl(photos)}
+            // image={photos}
             sx={{ transition: "all 0.3s linear" }}
           />
           
