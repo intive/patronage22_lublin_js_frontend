@@ -21,9 +21,11 @@ interface ProductDetailProps {
   photos: string;
   title: string;
   description: string;
+
 }
 
 function ProductDetail(props: ProductDetailProps) {
+  const { photos, title, price, description} = props;
   const [value, setValue] = React.useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -32,7 +34,6 @@ function ProductDetail(props: ProductDetailProps) {
 
   return (
     <section>
-
       <Box sx={{ marginTop: 7 }}>
         <Link href="/products" passHref>
           <MainButton>
@@ -51,7 +52,7 @@ function ProductDetail(props: ProductDetailProps) {
             <Box sx={{ paddingLeft: { md: '30px', xs: '10px' }, marginLeft:{xs:'20%', sm:'30%', md:0} }}>
               <Box sx={{marginTop:{xs:5, sm:5, md:0}  }}  >
                 <Typography variant='h4'>
-                  <Box>{props.title}</Box>
+                  <Box>{title} </Box>
                 </Typography>
               </Box>
               <Box
@@ -73,11 +74,11 @@ function ProductDetail(props: ProductDetailProps) {
                 <Box>23 reviews</Box>
               </Box>
               <Typography sx={{ fontSize: 25, marginTop: 3, color: '#003E7D' }} component="div">
-                ${props.price}.00
+                ${price}.00
               </Typography>
               <CustomText variant='inherit'>
                 <Box sx={{ marginTop: 3, fontWeight: '300', fontSize: 20, textAlign: 'justify' }}>
-                  {props.description}
+                  {description}
                 </Box>
               </CustomText>
               <Box sx={{ marginTop: 3 }}>

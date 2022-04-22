@@ -5,6 +5,7 @@ interface ProductListProps {
   searchTerm: string;
   price: number;
   category: string;
+  
 }
 
 function ProductList(props: ProductListProps) {

@@ -6,8 +6,9 @@ import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
-import { Box, Stack } from "@mui/material";
+import { Box, Link, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { getImageUrl } from "../../lib/utils";
 
 const CustomIcon = styled(IconButton)(({ theme }) => ({
   position: "absolute",
@@ -48,13 +49,15 @@ interface ProductItemProps {
   title: string;
   description: string;
   price: number;
+  url?:any;
 }
 
 function ProductItem(props: ProductItemProps) {
+  const { id, photos, title, description, price,url} = props;
   const router = useRouter();
 
   function showDetailsHandler() {
-    router.push("/products/" + props.id);
+    router.push("/products/" + id);
   }
 
   return (
@@ -63,10 +66,12 @@ function ProductItem(props: ProductItemProps) {
         <CustomContainer>
           <CardMedia
             component="img"
-            alt={props.title}
-            image={props.photos}
+            alt={title}
+            // image={getImageUrl(photos)}
+            image={photos}
             sx={{ transition: "all 0.3s linear" }}
           />
+          
           <CustomIcon onClick={showDetailsHandler}>
             <ZoomInOutlinedIcon
               sx={{
@@ -84,10 +89,10 @@ function ProductItem(props: ProductItemProps) {
             spacing={2}
           >
             <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
-              {props.title}
+              {title}
             </Typography>
             <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
-              {props.price}.00$
+              {price}.00$
             </Typography>
           </Stack>
         </CardContent>
