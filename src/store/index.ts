@@ -10,7 +10,6 @@ import {
   productDetailsReducer,
 } from "../reducers/productReducer";
 import { cartReducer } from "../reducers/cartReducer";
-import { userData } from "../actions/userActions";
 import {
   userPaymentMethod,
   userCart,
@@ -25,8 +24,16 @@ const rootReducer = combineReducers({
   cart: cartReducer,
 });
 
+let userInfoFromStorage;
+
+if (typeof window !== "undefined") {
+  userInfoFromStorage = localStorage.getItem("userInfo")
+    ? JSON.stringify(localStorage.getItem("userInfo"))
+    : null;
+}
+
 const initialState = {
-  userLogin: { userInfo: userData },
+  userLogin: { userInfo: userInfoFromStorage },
   cart: {
     cartItems: userCart,
     shippingAddress: userShippingAddress,

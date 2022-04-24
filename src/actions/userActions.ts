@@ -4,8 +4,6 @@ import { AnyAction } from "redux";
 import { RootState } from "../store";
 import { loginUserRequest, registerUserRequest } from "../lib/authorization";
 
-export let userData: null;
-
 export const login =
   (
     email: string,
@@ -24,7 +22,9 @@ export const login =
         payload: data,
       });
 
-      userData = data;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userInfo", JSON.stringify(data));
+      }
     } catch (error: any) {
       dispatch({
         type: constants.USER_LOGIN_FAIL,
@@ -60,7 +60,9 @@ export const register =
         payload: data,
       });
 
-      userData = data;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userInfo", JSON.stringify(data));
+      }
     } catch (error: any) {
       dispatch({
         type: constants.USER_REGISTER_FAIL,
@@ -74,6 +76,8 @@ export const register =
 
 export const logout =
   (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch) => {
-    userData = null;
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("userInfo");
+    }
     dispatch({ type: constants.USER_LOGOUT });
   };

@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/userActions";
 
 interface MyFormValues {
   email: string;
@@ -15,6 +17,18 @@ function LoginForm() {
     email: "",
     password: "",
   };
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const userLogin = useSelector((state: any) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/");
+    }
+  }, [router, userInfo]);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -28,7 +42,7 @@ function LoginForm() {
     initialValues: initialValuesForm,
     onSubmit(values) {
       const payload = { ...values };
-      console.log(payload);
+      dispatch(login(values.email, values.password));
     },
     validationSchema,
   });
@@ -67,8 +81,10 @@ function LoginForm() {
         </FormControl>
 
         <div className="actions">
-          <button>Login</button>
+          <button type="submit">{loading ? "Loading..." : "Login"}</button>
         </div>
+        {error && <p>{error}</p>}
+        {loading && <p>Loading...</p>}
         <p>
           New Customer? <Link href="/register">Register</Link>
         </p>
