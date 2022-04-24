@@ -18,7 +18,7 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
 
-const pages = ["Home", "About", "Products", "Cart"];
+const pages = ["Home", "About", "Products"];
 const settings = ["Profile", "Account", "Dashboard"];
 
 const MainNavigation = () => {
@@ -139,6 +139,11 @@ const MainNavigation = () => {
 
           {userInfo ? (
             <Box sx={{ flexGrow: 0 }}>
+              <Link href="/cart">
+                <Button color="inherit">
+                  <ShoppingCartIcon /> Cart
+                </Button>
+              </Link>
               <Tooltip title="Open settings">
                 <IconButton
                   onClick={handleOpenUserMenu}

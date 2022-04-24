@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ProductList from "../../components/ProductList";
 import { GetStaticProps } from "next";
+import { InferGetStaticPropsType } from "next";
+import { loadProducts } from "../../lib/products";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
@@ -16,67 +18,6 @@ import { SelectChangeEvent } from "@mui/material";
 import { getCategories } from "../../lib/categories";
 import { Category } from "../../types/models";
 
-const products = [
-  {
-    id: 1,
-    title: "Pierwszy produkt",
-    price: 1499.99,
-    description: "Opis proiduktu",
-    category: 1,
-    photos:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80",
-  },
-  {
-    id: 2,
-    title: "Drugi produkt",
-    price: 105.99,
-    description: "First Prod",
-    category: 2,
-    photos:
-      "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80",
-  },
-  {
-    id: 3,
-    title: "Trzeci produkt",
-    price: 59.99,
-    description: "Sec Prod",
-    category: 3,
-    photos:
-      "https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80",
-  },
-  {
-    id: 4,
-    title: "Czwarty produkt",
-    price: 10229.5,
-    description: "Opis proiduktu",
-    category: 2,
-    photos:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80",
-  },
-  {
-    id: 5,
-    title: "Piąty produkt",
-    price: 5000.99,
-    category: 1,
-    description: "First Prod",
-    photos:
-      "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80",
-  },
-  {
-    id: 6,
-    title: "Szósty produkt",
-    price: 2499.89,
-    description: "Sec Prod",
-    category: 3,
-    photos:
-      "https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80",
-  },
-];
-
-interface ProductPageProps {
-  categories: Category[];
-}
-
 const categoryAll: Category = {
   id: 0,
   title: "All",
@@ -85,16 +26,19 @@ const categoryAll: Category = {
   updatedAt: "",
 };
 
-function ProductsPage({ categories }: ProductPageProps) {
+function ProductsPage({
+  products,
+  categories,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const maxPrice = Math.max.apply(
     Math,
-    products.map(function (o) {
+    products.map(function (o: any) {
       return o.price;
     })
   );
   const minPrice = Math.min.apply(
     Math,
-    products.map(function (o) {
+    products.map(function (o: any) {
       return o.price;
     })
   );
@@ -105,7 +49,7 @@ function ProductsPage({ categories }: ProductPageProps) {
   const [isListView, setListView] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [categoriesList, setCategoriesList] = useState<Category[]>(categories);
-  const [category, setCategory] = useState<number>(0);
+  const [categoryId, setCategoryId] = useState<number>(0);
 
   const handleSliderChange = (event: any, newValue: any) => {
     setPrice(newValue);
@@ -116,7 +60,7 @@ function ProductsPage({ categories }: ProductPageProps) {
   };
 
   const handleCategoryChange = (event: SelectChangeEvent<number | null>) => {
-    setCategory(event.target.value as number);
+    setCategoryId(event.target.value as number);
   };
 
   const handleSortChange = (event: SelectChangeEvent<string>) => {
@@ -135,12 +79,12 @@ function ProductsPage({ categories }: ProductPageProps) {
     setPrice(maxPrice);
     setSortCondition("");
     setSearchTerm("");
-    setCategory(0);
+    setCategoryId(0);
   };
   return (
     <section>
       <h2>
-        Home <span className='location'> {">"} Products</span>
+        Home <span className="location"> {">"} Products</span>
       </h2>
       <Box sx={{ marginTop: 5 }}>
         <Grid container spacing={2}>
@@ -154,7 +98,7 @@ function ProductsPage({ categories }: ProductPageProps) {
             <Categories
               onChange={handleCategoryChange}
               categoriesList={categoriesList}
-              selectedCategory={category}
+              selectedCategory={categoryId}
             />
             <h4>Company</h4>
             <Companies onChange={handleCompanyChange} value={company} />
@@ -164,7 +108,7 @@ function ProductsPage({ categories }: ProductPageProps) {
               <Slider
                 value={price}
                 onChange={handleSliderChange}
-                aria-labelledby='input-slider'
+                aria-labelledby="input-slider"
                 min={minPrice}
                 max={maxPrice}
                 step={100}
@@ -207,12 +151,12 @@ function ProductsPage({ categories }: ProductPageProps) {
               <p style={{ marginRight: "0.5rem" }}>Sort By</p>
               <Sort onChange={handleSortChange} value={sortCondition} />
             </Box>
-            <div id='products'>
+            <div id="products">
               {!isListView ? (
                 <ProductList
                   searchTerm={searchTerm}
                   price={price}
-                  category={category}
+                  categoryId={categoryId}
                   products={
                     sortCondition === "high-price"
                       ? products.sort(function (a: any, b: any) {
@@ -227,7 +171,7 @@ function ProductsPage({ categories }: ProductPageProps) {
                 <ListProductsView
                   searchTerm={searchTerm}
                   price={price}
-                  category={category}
+                  categoryId={categoryId}
                   products={
                     sortCondition === "high-price"
                       ? products.sort(function (a: any, b: any) {
@@ -247,9 +191,9 @@ function ProductsPage({ categories }: ProductPageProps) {
   );
 }
 
-/*
 export const getStaticProps: GetStaticProps = async () => {
   const products = await loadProducts();
+  const categories = await getCategories();
 
   return {
     props: {
@@ -259,17 +203,8 @@ export const getStaticProps: GetStaticProps = async () => {
         id: product.id,
         photos: product.photos[0].url,
         price: product.price,
+        categoryId: product.categoryId,
       })),
-    },
-  };
-};
-*/
-
-export const getStaticProps: GetStaticProps = async () => {
-  const categories = await getCategories();
-
-  return {
-    props: {
       categories:
         categories?.map((category: Category) => ({
           id: category.id,
