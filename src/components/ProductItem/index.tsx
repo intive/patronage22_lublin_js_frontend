@@ -45,21 +45,23 @@ const CustomContainer = styled(Box)(({ theme }) => ({
 
 export interface ProductItemProps {
   id: number;
-  photos: [];
+  photos: [] | string;
   title: string;
   description: string;
   price: number;
-  url?:any;
+  url?: any;
 }
 
 function ProductItem(props: ProductItemProps) {
-  const { id, photos, title, description, price,url} = props;
+  const { id, photos, title, description, price} = props;
   const router = useRouter();
 
   function showDetailsHandler() {
     router.push("/products/" + id);
   }
 
+  const defaultImage='https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80'
+ 
   return (
     <div className="item">
       <Card>
@@ -67,11 +69,9 @@ function ProductItem(props: ProductItemProps) {
           <CardMedia
             component="img"
             alt={title}
-            image={getImageUrl(photos)}
-            // image={photos}
-            sx={{ transition: "all 0.3s linear" }}
+            image={ defaultImage && getImageUrl(photos) }
+              sx={{ transition: "all 0.3s linear" }}
           />
-          
           <CustomIcon onClick={showDetailsHandler}>
             <ZoomInOutlinedIcon
               sx={{
@@ -81,7 +81,7 @@ function ProductItem(props: ProductItemProps) {
             />
           </CustomIcon>
         </CustomContainer>
-        <CardContent>
+        <CardContent sx={{ height:'87px' }}>
           <Stack
             direction="row"
             justifyContent="space-between"

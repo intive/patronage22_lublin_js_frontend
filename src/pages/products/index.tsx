@@ -254,6 +254,7 @@ function ProductsPage({ categories, products }: ProductPageProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const products = await loadProducts();
   const categories = await getCategories();
+
   return {
     props: {
       products:
@@ -275,21 +276,5 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
-
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const categories = await getCategories();
-
-//   return {
-//     props: {
-//       categories:
-//         categories?.map((category: Category) => ({
-//           id: category.id,
-//           title: category.title,
-//           description: category.description,
-//         })) || [],
-//     },
-//   };
-// };
 
 export default ProductsPage;

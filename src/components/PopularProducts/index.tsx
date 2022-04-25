@@ -42,8 +42,14 @@ const Underline = styled('div')(({ theme }) => ({
     marginTop: '5px'
 }));
 
-function PopularProducts(props: ProductItemProps) {
-    const { id, photos, title, description, price,url} = props;
+interface PopularPoductsProps {
+    products: any[];
+  }
+
+
+function PopularProducts(props: PopularPoductsProps) {
+    // const { id, photos, title, description, price,url} = props;
+     const { products} = props;
     return (
         <Box sx={{ marginTop: 10, flexGrow: 1 }}>
             <Typography variant='h4' textAlign={'center'}>
@@ -56,19 +62,21 @@ function PopularProducts(props: ProductItemProps) {
                 justifyContent={'center'}
               spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm:6,  md: 12 }}
                 >
-                    {products && products.map((product: { id: any; photos: any; description: any; title: any; price: any; }) =>
-                        <Grid item 
-                        key={product.id} 
+                    {products && products.map((product) =>{
+                         const { id, photos, title, description, price } = product;
+                       return(
+                         <Grid item 
+                        key={id} 
                         justifyContent={'center'}>
                         <ProductItem 
-                          id={product.id}
-                            photos={product.photos}
-                            title={product.title}
-                            description={product.description}
-                            price={product.price}
+                          id={id}
+                            photos={photos}
+                            title={title}
+                            description={description}
+                            price={price}
                         />
                         </Grid>
-                    )}
+                    )})}
                 </Grid>
             </Box>
             <Box sx={{ marginTop: 3, textAlign: 'center' }}>
@@ -81,5 +89,4 @@ function PopularProducts(props: ProductItemProps) {
         </Box>
     );
 }
-
 export default PopularProducts;

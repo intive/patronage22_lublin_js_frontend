@@ -13,5 +13,8 @@ export function getImageUrl(photos: any) {
     return (
         'http://proxy-patronageapi.bsolutions.usermd.net/' +
         mapPhotos
+        //  &&
+        // onError={(e)=>{e.target.onerror = null;
+        //      e.target.src="image_path_here"}}
     )
 }
