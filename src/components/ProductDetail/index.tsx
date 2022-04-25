@@ -18,9 +18,10 @@ const CustomText = styled(Typography)(({ theme }) => ({
 
 interface ProductDetailProps {
   price: string;
-  photos: string;
+  photos: string[];
   title: string;
   description: string;
+ 
 
 }
 
@@ -45,7 +46,7 @@ function ProductDetail(props: ProductDetailProps) {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} sm={12}>
             <Box >
-              <ProductImages />
+              <ProductImages photos={photos}/>
             </Box>
           </Grid>
           <Grid item xs={12} md={6} sm={12} >

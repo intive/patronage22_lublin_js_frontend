@@ -4,7 +4,7 @@ import { Product } from "../types/models";
 
 
 interface ProductsDataProps {
-  data: Product[];
+  data?: Product[];
 }
 interface ProductsDetailsProps {
   data: Product;
