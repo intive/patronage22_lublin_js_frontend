@@ -8,29 +8,6 @@ import ProductItem from "../ProductItem";
 import {ProductItemProps} from '../ProductItem';
 
 
-
-
-const products =
-    [
-        {
-            "id": 1, "title": "Pierwszy produkt", "price": 15000, "description": "Opis proiduktu",
-            "photos": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80"
-        }
-        ,
-
-        {
-            "id": 2, "title": "Drugi produkt", "price": 15555, "description": "First Prod",
-            "photos": "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80"
-        }
-        ,
-
-        {
-            "id": 3, "title": "Trzeci produkt", "price": 15551412, "description": "Sec Prod",
-            "photos": "https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80"
-        }
-
-    ]
-
 const Underline = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     width: '150px',
@@ -48,7 +25,6 @@ interface PopularPoductsProps {
 
 
 function PopularProducts(props: PopularPoductsProps) {
-    // const { id, photos, title, description, price,url} = props;
      const { products} = props;
     return (
         <Box sx={{ marginTop: 10, flexGrow: 1 }}>

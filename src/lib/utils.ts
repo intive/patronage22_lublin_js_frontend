@@ -1,3 +1,4 @@
+import { CONSTANTS } from "../types/constants";
 
 export function mapEntriesSlugToPaths(entries: any[]) {
     if (!entries.length) return [];
@@ -11,10 +12,8 @@ export function mapEntriesSlugToPaths(entries: any[]) {
 export function getImageUrl(photos: any) {
     const mapPhotos=photos.map((photo: { url: any; })=>photo.url)[0]
     return (
-        'http://proxy-patronageapi.bsolutions.usermd.net/' +
+        (`${CONSTANTS.URL}/`)
+        +
         mapPhotos
-        //  &&
-        // onError={(e)=>{e.target.onerror = null;
-        //      e.target.src="image_path_here"}}
     )
 }

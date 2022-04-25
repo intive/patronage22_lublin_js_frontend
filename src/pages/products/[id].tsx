@@ -2,9 +2,10 @@
 import React from 'react';
 import ProductDetail from "../../components/ProductDetail";
 import { GetStaticProps, GetStaticPaths, NextPage, InferGetStaticPropsType } from "next";
-import { loadProductDetails, loadProducts, Product } from "../../lib/products";
+import { loadProductDetails, loadProducts } from "../../lib/products";
 import { mapEntriesSlugToPaths } from '../../lib/utils';
 import { ParsedUrlQuery } from 'querystring';
+import {Product} from '../../types/models';
 
 
 interface ProductDetailsPageProps {
