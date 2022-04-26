@@ -1,4 +1,10 @@
-import { FormControl, FormLabel, FormHelperText, Input } from "@mui/material";
+import {
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Input,
+  Button,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -80,9 +86,9 @@ function LoginForm() {
           {errors.password && <p className="error">{errors.password}</p>}
         </FormControl>
 
-        <div className="actions">
-          <button type="submit">{loading ? "Loading..." : "Login"}</button>
-        </div>
+        <FormControl className="actions">
+          <Button type="submit">{loading ? "Loading..." : "Login"}</Button>
+        </FormControl>
         {error && <p>{error}</p>}
         {loading && <p>Loading...</p>}
         <p>

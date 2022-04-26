@@ -197,7 +197,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      products: products.map((product: any) => ({
+      products: products?.map((product: any) => ({
         title: product.title,
         description: product.description,
         id: product.id,

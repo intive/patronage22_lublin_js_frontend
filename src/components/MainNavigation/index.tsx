@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -123,11 +122,11 @@ const MainNavigation = () => {
           >
             {pages.map((page) => (
               <Link
+                key={page}
                 href={page === "Home" ? "/" : `/${page.toLocaleLowerCase()}`}
               >
                 <Button
                   className="nav-link"
-                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
@@ -144,14 +143,12 @@ const MainNavigation = () => {
                   <ShoppingCartIcon /> Cart
                 </Button>
               </Link>
-              <Tooltip title="Open settings">
-                <IconButton
-                  onClick={handleOpenUserMenu}
-                  sx={{ size: "medium", p: 0 }}
-                >
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ size: "medium", p: 0 }}
+              >
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"

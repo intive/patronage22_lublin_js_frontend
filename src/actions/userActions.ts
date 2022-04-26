@@ -15,7 +15,7 @@ export const login =
         type: constants.USER_LOGIN_REQUEST,
       });
 
-      const data = (await loginUserRequest(email, password)).data;
+      const data = (await loginUserRequest(email, password))?.data;
 
       dispatch({
         type: constants.USER_LOGIN_SUCCESS,
