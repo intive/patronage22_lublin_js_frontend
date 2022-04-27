@@ -60,12 +60,12 @@ const MainNavigation = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
-             size="large"
-             aria-label="account of current user"
-             aria-controls="menu-appbar"
-             aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            color="inherit"
             >
               <MenuIcon />
             </IconButton>
@@ -139,7 +139,7 @@ const MainNavigation = () => {
 
           {userInfo ? (
             <Box sx={{ flexGrow: 0 }}>
-                <Link href="/cart">
+              <Link href="/cart">
                 <Button color="inherit">
                   <ShoppingCartIcon /> Cart
                 </Button>
@@ -183,12 +183,12 @@ const MainNavigation = () => {
             </Box>
           ) : (
             <Box sx={{ flexGrow: 0 }}>
-                <Link href="/cart">
+              <Link href="/cart">
                 <Button color="inherit">
                   <ShoppingCartIcon /> Cart
                 </Button>
               </Link>
-                <Link href="/login">
+              <Link href="/login">
                 <Button color="inherit">
                   <FaceIcon /> Login
                 </Button>
