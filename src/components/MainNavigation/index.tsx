@@ -9,20 +9,24 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FaceIcon from "@mui/icons-material/Face";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../actions/userActions";
 
 const pages = ["Home", "Products", "About", "Contact"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Account", "Dashboard"];
 
 const MainNavigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [userLogged, setUserLogged] = React.useState(false);
+
+  const userLogin = useSelector((state: any) => state.userLogin);
+  const { userInfo } = userLogin;
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -118,6 +122,7 @@ const MainNavigation = () => {
           >
             {pages.map((page) => (
               <Link
+                key={page}
                 href={page === "Home" ? "/" : `/${page.toLocaleLowerCase()}`}
               >
                 <Button
@@ -132,16 +137,19 @@ const MainNavigation = () => {
             ))}
           </Box>
 
-          {userLogged ? (
+          {userInfo ? (
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title='Open settings'>
-                <IconButton
-                  onClick={handleOpenUserMenu}
-                  sx={{ size: "medium", p: 0 }}
-                >
-                  <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
-                </IconButton>
-              </Tooltip>
+              <Link href='/cart'>
+                <Button color='inherit'>
+                  <ShoppingCartIcon /> Cart
+                </Button>
+              </Link>
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ size: "medium", p: 0 }}
+              >
+                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+              </IconButton>
               <Menu
                 sx={{ mt: "45px" }}
                 id='menu-appbar'
@@ -163,6 +171,14 @@ const MainNavigation = () => {
                     <Typography textAlign='center'>{setting}</Typography>
                   </MenuItem>
                 ))}
+                <MenuItem
+                  key='Logout'
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
+                  <Typography textAlign='center'>Logout</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           ) : (

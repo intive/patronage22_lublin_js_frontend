@@ -1,4 +1,10 @@
-import { FormControl, FormLabel, FormHelperText, Input } from "@mui/material";
+import {
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Input,
+  Button,
+} from "@mui/material";
 import React from "react";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -79,9 +85,9 @@ function RegisterForm() {
           {errors.password && <p className="error">{errors.password}</p>}
         </FormControl>
 
-        <div className="actions">
-          <button>Register</button>
-        </div>
+        <FormControl className="actions">
+          <Button type="submit">Register</Button>
+        </FormControl>
         <p>
           Already have an account? <Link href="/login">Login</Link>
         </p>

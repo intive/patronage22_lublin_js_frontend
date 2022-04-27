@@ -23,7 +23,11 @@ function Companies(props: CompanyProsp) {
           <em>None</em>
         </MenuItem>
         {companies.map((company) => {
-          return <MenuItem value={company}>{company}</MenuItem>;
+          return (
+            <MenuItem key={company} value={company}>
+              {company}
+            </MenuItem>
+          );
         })}
       </Select>
     </FormControl>
