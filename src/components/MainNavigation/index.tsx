@@ -44,33 +44,33 @@ const MainNavigation = () => {
   };
 
   return (
-    <AppBar position='static' className='app-bar'>
-      <Container maxWidth='lg' sx={{ mt: 3 }}>
+    <AppBar position="static" className="app-bar">
+      <Container maxWidth="lg" sx={{ mt: 3 }}>
         <Toolbar disableGutters>
           <Typography
-            variant='h6'
+            variant="h6"
             noWrap
-            component='div'
+            component="div"
             sx={{ mr: 2, display: { xs: "none", md: "block" } }}
           >
             <WhatshotIcon sx={{ fontSize: 50, color: "#0057D8" }} />
-            <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>
+            <Typography variant="subtitle2" color="#0057D8" lineHeight={1}>
               e-shop
             </Typography>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
-              size='large'
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
+             size="large"
+             aria-label="account of current user"
+             aria-controls="menu-appbar"
+             aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color='inherit'
+              color="inherit"
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id='menu-appbar'
+              id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: "bottom",
@@ -89,26 +89,26 @@ const MainNavigation = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>
+                  <Typography textAlign="center">
                     <Link
                       href={
                         page === "Home" ? "/" : `/${page.toLocaleLowerCase()}`
                       }
                     >
-                      <div className='nav-link'>{page}</div>
+                      <div className="nav-link">{page}</div>
                     </Link>
                   </Typography>
                 </MenuItem>
               ))}
             </Menu>
             <Typography
-              variant='h6'
+              variant="h6"
               noWrap
-              component='div'
+              component="div"
               sx={{ mr: 2, display: { xs: "block", md: "none" } }}
             >
               <WhatshotIcon sx={{ fontSize: 50, color: "#0057D8" }} />
-              <Typography variant='subtitle2' color='#0057D8' lineHeight={1}>
+              <Typography variant="subtitle2" color="#0057D8" lineHeight={1}>
                 e-shop
               </Typography>
             </Typography>
@@ -126,7 +126,7 @@ const MainNavigation = () => {
                 href={page === "Home" ? "/" : `/${page.toLocaleLowerCase()}`}
               >
                 <Button
-                  className='nav-link'
+                  className="nav-link"
                   key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
@@ -139,8 +139,8 @@ const MainNavigation = () => {
 
           {userInfo ? (
             <Box sx={{ flexGrow: 0 }}>
-              <Link href='/cart'>
-                <Button color='inherit'>
+                <Link href="/cart">
+                <Button color="inherit">
                   <ShoppingCartIcon /> Cart
                 </Button>
               </Link>
@@ -148,11 +148,11 @@ const MainNavigation = () => {
                 onClick={handleOpenUserMenu}
                 sx={{ size: "medium", p: 0 }}
               >
-                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
               <Menu
                 sx={{ mt: "45px" }}
-                id='menu-appbar'
+                id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
                   vertical: "top",
@@ -168,28 +168,28 @@ const MainNavigation = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center'>{setting}</Typography>
+                    <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
                 <MenuItem
-                  key='Logout'
+                  key="Logout"
                   onClick={() => {
                     dispatch(logout());
                   }}
                 >
-                  <Typography textAlign='center'>Logout</Typography>
+                  <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
               </Menu>
             </Box>
           ) : (
             <Box sx={{ flexGrow: 0 }}>
-              <Link href='/cart'>
-                <Button color='inherit'>
+                <Link href="/cart">
+                <Button color="inherit">
                   <ShoppingCartIcon /> Cart
                 </Button>
               </Link>
-              <Link href='/login'>
-                <Button color='inherit'>
+                <Link href="/login">
+                <Button color="inherit">
                   <FaceIcon /> Login
                 </Button>
               </Link>
