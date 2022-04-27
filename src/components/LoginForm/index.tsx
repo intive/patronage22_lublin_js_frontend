@@ -1,9 +1,17 @@
-import { FormControl, FormLabel, FormHelperText, Input } from "@mui/material";
+import {
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Input,
+  Button,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/userActions";
 
 interface MyFormValues {
   email: string;
@@ -15,6 +23,18 @@ function LoginForm() {
     email: "",
     password: "",
   };
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const userLogin = useSelector((state: any) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/");
+    }
+  }, [router, userInfo]);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -28,7 +48,7 @@ function LoginForm() {
     initialValues: initialValuesForm,
     onSubmit(values) {
       const payload = { ...values };
-      console.log(payload);
+      dispatch(login(values.email, values.password));
     },
     validationSchema,
   });
@@ -66,9 +86,11 @@ function LoginForm() {
           {errors.password && <p className="error">{errors.password}</p>}
         </FormControl>
 
-        <div className="actions">
-          <button>Login</button>
-        </div>
+        <FormControl className="actions">
+          <Button type="submit">{loading ? "Loading..." : "Login"}</Button>
+        </FormControl>
+        {error && <p>{error}</p>}
+        {loading && <p>Loading...</p>}
         <p>
           New Customer? <Link href="/register">Register</Link>
         </p>

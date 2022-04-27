@@ -2,18 +2,18 @@ import axios from "axios";
 import { CONSTANTS } from "../types/constants";
 import { Product } from "../types/models";
 
-
-interface ProductsDataProps {
-  data?: Product[];
+interface ProductDataProps {
+  data: Product[];
 }
-interface ProductsDetailsProps {
+interface ProductDetailsProps {
   data: Product;
 }
 
 export async function loadProducts() {
   try {
-    const {data}:ProductsDataProps= await axios.get(`${CONSTANTS.URL}/api/products`);
-
+    const { data }: ProductDataProps = await axios.get(
+      `${CONSTANTS.URL}/api/products/getAllPublishedProductsExternal`
+    );
     return data;
   } catch (error) {
     let message;
@@ -23,6 +23,9 @@ export async function loadProducts() {
   }
 }
 
+
+
+ 
 export async function loadProductDetails(id: string) {
   try {
     const {data}:ProductsDetailsProps = await axios.get(

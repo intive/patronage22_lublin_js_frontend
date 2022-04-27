@@ -4,26 +4,26 @@ interface ProductListProps {
   products: any[];
   searchTerm: string;
   price: number;
-  category: number;
+  categoryId: number;
 }
 
 function ProductList(props: ProductListProps) {
   return (
-    <ul className='list'>
+    <ul className="list">
       {props.products
         .filter((product) => {
-          const { title, price, category } = product;
+          const { title, price, categoryId } = product;
           if (props.searchTerm === "") {
-            return price <= props.price && props.category !== 0
-              ? category === props.category
+            return price <= props.price && props.categoryId !== 0
+              ? categoryId === props.categoryId
               : price <= props.price;
           } else if (
             title
               .toLocaleLowerCase()
               .includes(props.searchTerm.toLocaleLowerCase())
           ) {
-            return price <= props.price && props.category !== 0
-              ? category === props.category
+            return price <= props.price && props.categoryId !== 0
+              ? categoryId === props.categoryId
               : price <= props.price;
           }
         })
