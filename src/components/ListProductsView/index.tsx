@@ -37,7 +37,7 @@ function ListProductsView(props: ProductListProps) {
             }
           })
           .map((product) => (
-            <Item>
+            <Item key={product}>
               <CustomContainer>
                 <CardMedia
                   component="img"

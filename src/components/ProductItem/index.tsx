@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import { Box, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import MainButton from "../MainButton";
 
 const CustomIcon = styled(IconButton)(({ theme }) => ({
   position: "absolute",
@@ -90,6 +91,13 @@ function ProductItem(props: ProductItemProps) {
               {props.price}.00$
             </Typography>
           </Stack>
+          <MainButton
+            onClick={() => {
+              router.push("/products/" + props.id);
+            }}
+          >
+            Details
+          </MainButton>
         </CardContent>
       </Card>
     </div>

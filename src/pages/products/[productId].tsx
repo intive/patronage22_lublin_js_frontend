@@ -10,12 +10,13 @@ function ProductDetails({
     <section>
       <h2>
         Home {">"} Products{" "}
-        <span className='location'>
+        <span className="location">
           {" "}
           {">"} {productData.title}
         </span>
       </h2>
       <ProductDetail
+        id={productData.id}
         title={productData.title}
         description={productData.description}
         photos={productData.photos}
@@ -25,12 +26,12 @@ function ProductDetails({
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const products = await loadProducts();
 
   return {
     fallback: "blocking",
-    paths: products.map((product: any) => ({
+    paths: products?.map((product: any) => ({
       params: { productId: product.id.toString() },
     })),
   };
@@ -44,11 +45,11 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
   return {
     props: {
       productData: {
-        id: selectedProduct.id.toString(),
-        title: selectedProduct.title,
-        description: selectedProduct.description,
-        photos: selectedProduct.photos[0].url,
-        price: selectedProduct.price,
+        id: selectedProduct?.id.toString(),
+        title: selectedProduct?.title,
+        description: selectedProduct?.description,
+        photos: selectedProduct?.photos,
+        price: selectedProduct?.price,
       },
     },
   };

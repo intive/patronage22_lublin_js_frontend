@@ -10,11 +10,6 @@ import {
   productDetailsReducer,
 } from "../reducers/productReducer";
 import { cartReducer } from "../reducers/cartReducer";
-import {
-  userPaymentMethod,
-  userCart,
-  userShippingAddress,
-} from "../actions/cartActions";
 
 const rootReducer = combineReducers({
   userLogin: userLoginReducer,
@@ -25,6 +20,9 @@ const rootReducer = combineReducers({
 });
 
 let userInfoFromStorage;
+let cartItemsFromStorage = <any>[];
+let shippingAddressFromStorage = {};
+let paymentMethodFromStorage = {};
 
 if (typeof window !== "undefined") {
   userInfoFromStorage = localStorage.getItem("userInfo")
@@ -32,12 +30,30 @@ if (typeof window !== "undefined") {
     : null;
 }
 
+if (typeof window !== "undefined") {
+  cartItemsFromStorage = localStorage.getItem("cartItems")
+    ? JSON.stringify(localStorage.getItem("cartItems"))
+    : [];
+}
+
+if (typeof window !== "undefined") {
+  shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+    ? JSON.stringify(localStorage.getItem("shippingAddress"))
+    : {};
+}
+
+if (typeof window !== "undefined") {
+  paymentMethodFromStorage = localStorage.getItem("paymentMethod")
+    ? JSON.stringify(localStorage.getItem("paymentMethod"))
+    : {};
+}
+
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
   cart: {
-    cartItems: userCart,
-    shippingAddress: userShippingAddress,
-    paymentMethod: userPaymentMethod,
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+    paymentMethod: paymentMethodFromStorage,
   },
 };
 
