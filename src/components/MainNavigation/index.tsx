@@ -17,7 +17,7 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
 
-const pages = ["Home", "About", "Products"];
+const pages = ["Home", "Products", "About", "Contact"];
 const settings = ["Profile", "Account", "Dashboard"];
 
 const MainNavigation = () => {
@@ -127,6 +127,7 @@ const MainNavigation = () => {
               >
                 <Button
                   className="nav-link"
+                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
