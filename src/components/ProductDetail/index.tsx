@@ -21,6 +21,7 @@ interface ProductDetailProps {
   photos: string[];
   title: string;
   description: string;
+
  
 
 }
@@ -46,7 +47,7 @@ function ProductDetail(props: ProductDetailProps) {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} sm={12}>
             <Box >
-              <ProductImages/>
+              <ProductImages />
             </Box>
           </Grid>
           <Grid item xs={12} md={6} sm={12} >

@@ -16,7 +16,7 @@ function HomePage(props:HomePageProps) {
     <section>
       <Hero/>
       <PopularProducts 
-      products={props.products}
+      products={props.products.slice(0,3)}
       />
       <ServiceSection/>
       <NewsletterSection/>
@@ -35,9 +35,11 @@ export const getStaticProps: GetStaticProps = async () => {
           id: product.id,
           title: product.title,
           price: product.price,
+          photos: product?.photos
+           || null,
           description: product.description,
-          // category: product.category,
-          photos: product.photos,
+          categoryId: product.categoryId,
+         
         })) || [],
     },
   };

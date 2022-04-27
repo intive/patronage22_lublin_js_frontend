@@ -13,4 +13,4 @@ export interface Product {
   categoryId: number;
   photos: File[];
   price: number;
-
+}

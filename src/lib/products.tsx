@@ -13,6 +13,7 @@ export async function loadProducts() {
   try {
     const { data }: ProductDataProps = await axios.get(
       `${CONSTANTS.URL}/api/products/getAllPublishedProductsExternal`
+      // `http://localhost:40286/api/products/`
     );
     return data;
   } catch (error) {
@@ -26,10 +27,11 @@ export async function loadProducts() {
 
 
  
-export async function loadProductDetails(id: string) {
+export async function loadProductDetails(productId: string) {
   try {
-    const {data}:ProductsDetailsProps = await axios.get(
-      `${CONSTANTS.URL}/api/products/${id}`
+    const {data}:ProductDetailsProps = await axios.get(
+      `${CONSTANTS.URL}/api/products/external/${productId}`
+      // `http://localhost:40286/api/products/external/${productId}`
     );
 
     return data;
