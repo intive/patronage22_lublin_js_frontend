@@ -11,19 +11,23 @@ import StarIcon from '@mui/icons-material/Star';
 import { Stack } from "@mui/material";
 import AddToCart from "../AddToCart";
 
-const CustomText = styled(Typography)(({ theme }) => ({
+const CustomText = styled('div')(({ theme }) => ({
   color: theme.palette.info.light
 }));
 
 
 interface ProductDetailProps {
   price: string;
-  photos: string;
+  photos: string[];
   title: string;
   description: string;
+
+ 
+
 }
 
 function ProductDetail(props: ProductDetailProps) {
+  const { photos, title, price, description} = props;
   const [value, setValue] = React.useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -32,7 +36,6 @@ function ProductDetail(props: ProductDetailProps) {
 
   return (
     <section>
-
       <Box sx={{ marginTop: 7 }}>
         <Link href="/products" passHref>
           <MainButton>
@@ -50,8 +53,8 @@ function ProductDetail(props: ProductDetailProps) {
           <Grid item xs={12} md={6} sm={12} >
             <Box sx={{ paddingLeft: { md: '30px', xs: '10px' }, marginLeft:{xs:'20%', sm:'30%', md:0} }}>
               <Box sx={{marginTop:{xs:5, sm:5, md:0}  }}  >
-                <Typography variant='h4'>
-                  <Box>{props.title}</Box>
+                <Typography component="div" variant='h4'>
+                  <Box>{title} </Box>
                 </Typography>
               </Box>
               <Box
@@ -73,11 +76,11 @@ function ProductDetail(props: ProductDetailProps) {
                 <Box>23 reviews</Box>
               </Box>
               <Typography sx={{ fontSize: 25, marginTop: 3, color: '#003E7D' }} component="div">
-                ${props.price}.00
+                ${price}.00
               </Typography>
-              <CustomText variant='inherit'>
+              <CustomText >
                 <Box sx={{ marginTop: 3, fontWeight: '300', fontSize: 20, textAlign: 'justify' }}>
-                  {props.description}
+                  {description}
                 </Box>
               </CustomText>
               <Box sx={{ marginTop: 3 }}>

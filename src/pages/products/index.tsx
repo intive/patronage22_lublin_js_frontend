@@ -18,6 +18,10 @@ import { SelectChangeEvent } from "@mui/material";
 import { getCategories } from "../../lib/categories";
 import { Category } from "../../types/models";
 
+
+
+
+
 const categoryAll: Category = {
   id: 0,
   title: "All",
@@ -26,6 +30,7 @@ const categoryAll: Category = {
   updatedAt: "",
 };
 
+
 function ProductsPage({
   products,
   categories,
@@ -33,12 +38,15 @@ function ProductsPage({
   const maxPrice = Math.max.apply(
     Math,
     products.map(function (o: any) {
+
       return o.price;
     })
   );
   const minPrice = Math.min.apply(
     Math,
+
     products.map(function (o: any) {
+
       return o.price;
     })
   );
@@ -160,11 +168,11 @@ function ProductsPage({
                   products={
                     sortCondition === "high-price"
                       ? products.sort(function (a: any, b: any) {
-                          return b.price - a.price;
-                        })
+                        return b.price - a.price;
+                      })
                       : products.sort(function (a: any, b: any) {
-                          return a.price - b.price;
-                        })
+                        return a.price - b.price;
+                      })
                   }
                 />
               ) : (
@@ -175,11 +183,11 @@ function ProductsPage({
                   products={
                     sortCondition === "high-price"
                       ? products.sort(function (a: any, b: any) {
-                          return b.price - a.price;
-                        })
+                        return b.price - a.price;
+                      })
                       : products.sort(function (a: any, b: any) {
-                          return a.price - b.price;
-                        })
+                        return a.price - b.price;
+                      })
                   }
                 />
               )}
@@ -187,6 +195,7 @@ function ProductsPage({
           </Grid>
         </Grid>
       </Box>
+
     </section>
   );
 }
@@ -197,11 +206,12 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
+
       products: products?.map((product: any) => ({
         title: product.title,
         description: product.description,
         id: product.id,
-        photos: product.photos[0].url,
+        photos: product.photos || null,
         price: product.price,
         categoryId: product.categoryId,
       })),
