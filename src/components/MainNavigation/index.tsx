@@ -89,7 +89,7 @@ const MainNavigation = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
+                  <Typography textAlign="center" component='div'>
                     <Link
                       href={
                         page === "Home" ? "/" : `/${page.toLocaleLowerCase()}`

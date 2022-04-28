@@ -11,7 +11,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { Stack } from "@mui/material";
 import AddToCart from "../AddToCart";
 
-const CustomText = styled(Typography)(({ theme }) => ({
+const CustomText = styled('div')(({ theme }) => ({
   color: theme.palette.info.light
 }));
 
@@ -53,7 +53,7 @@ function ProductDetail(props: ProductDetailProps) {
           <Grid item xs={12} md={6} sm={12} >
             <Box sx={{ paddingLeft: { md: '30px', xs: '10px' }, marginLeft:{xs:'20%', sm:'30%', md:0} }}>
               <Box sx={{marginTop:{xs:5, sm:5, md:0}  }}  >
-                <Typography variant='h4'>
+                <Typography component="div" variant='h4'>
                   <Box>{title} </Box>
                 </Typography>
               </Box>
@@ -78,7 +78,7 @@ function ProductDetail(props: ProductDetailProps) {
               <Typography sx={{ fontSize: 25, marginTop: 3, color: '#003E7D' }} component="div">
                 ${price}.00
               </Typography>
-              <CustomText variant='inherit'>
+              <CustomText >
                 <Box sx={{ marginTop: 3, fontWeight: '300', fontSize: 20, textAlign: 'justify' }}>
                   {description}
                 </Box>

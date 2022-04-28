@@ -28,7 +28,7 @@ function PopularProducts(props: PopularPoductsProps) {
      const { products} = props;
     return (
         <Box sx={{ marginTop: 10, flexGrow: 1 }}>
-            <Typography variant='h4' textAlign={'center'}>
+            <Typography variant='h4' textAlign={'center'} component='div'>
                 <Box>Popular Products</Box>
                 <Underline />
             </Typography>
