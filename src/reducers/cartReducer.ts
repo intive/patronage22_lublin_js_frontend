@@ -1,7 +1,11 @@
 import * as constants from "../types/cartConstants";
 
+interface Cart {
+  cartItems: [];
+}
+
 export const cartReducer = (
-  state = { cartItems: [{}], shippingAddress: {}, paymentMethod: {} },
+  state = { cartItems: <Cart[]>[], shippingAddress: {}, paymentMethod: {} },
   action: any
 ) => {
   switch (action.type) {

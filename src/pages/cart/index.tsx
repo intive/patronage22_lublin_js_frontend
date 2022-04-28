@@ -15,35 +15,10 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useDispatch, useSelector } from "react-redux";
 import { Router, useRouter } from "next/router";
 import { addToCart, removeFromCart } from "../../actions/cartActions";
+import { ProductionQuantityLimitsSharp } from "@mui/icons-material";
 
 function CartPage() {
   const [quantity, setQuantity] = useState("1");
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      title: "Pierwszy produkt",
-      price: 15000,
-      description: "Opis proiduktu",
-      photos:
-        "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80",
-    },
-    {
-      id: 2,
-      title: "Drugi produkt",
-      price: 15555,
-      description: "First Prod",
-      photos:
-        "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80",
-    },
-    {
-      id: 3,
-      title: "Trzeci produkt",
-      price: 15551412,
-      description: "Sec Prod",
-      photos:
-        "https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80",
-    },
-  ]);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -66,21 +41,17 @@ function CartPage() {
   //const qtv = location.search ? Number(location.search.split("=")[1]) : 1;
 
   useEffect(() => {
-    router.asPath === `/cart?id=${productId}` && router.push("/cart");
     if (productId) {
-      dispatch(addToCart(productId, quantity));
+      dispatch(addToCart(productId.toString(), quantity));
+      router.asPath === `/cart?id=${productId.toString()}` &&
+        router.push("/cart");
     }
   }, [dispatch, productId, quantity, router]);
 
-  const handleRemove = (id: any) => {
-    const newProducts = products.filter((product) => product.id !== id);
-    setProducts(newProducts);
-  };
   const handleChange = (event: any) => {
     setQuantity(event.target.value);
   };
   const clearCartHandler = () => {
-    setProducts([]);
     localStorage.removeItem("cartItems");
     window.location.reload();
     setQuantity("");
