@@ -10,6 +10,7 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import { Stack } from "@mui/material";
 import AddToCart from "../AddToCart";
+import { getImageUrl } from "../../lib/utils";
 
 const CustomText = styled('div')(({ theme }) => ({
   color: theme.palette.info.light
@@ -47,7 +48,9 @@ function ProductDetail(props: ProductDetailProps) {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} sm={12}>
             <Box >
-              <ProductImages />
+              <ProductImages 
+              photos={photos}
+                />
             </Box>
           </Grid>
           <Grid item xs={12} md={6} sm={12} >
@@ -108,8 +111,8 @@ function ProductDetail(props: ProductDetailProps) {
                 </Stack>
               </Box>
               <AddToCart />
+            
             </Box>
-
           </Grid>
         </Grid>
       </Box>
