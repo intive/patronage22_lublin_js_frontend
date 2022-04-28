@@ -19,7 +19,7 @@ const Container = styled(Box)(({ theme }) => ({
 function Footer() {
     return (
         <Container>
-            <Typography>
+            <Typography component='div'>
                 &copy; {new Date().getFullYear()}
                 <span> Copany name All rights reserved</span>
             </Typography>

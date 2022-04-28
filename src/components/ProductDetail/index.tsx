@@ -11,8 +11,8 @@ import StarIcon from "@mui/icons-material/Star";
 import { Stack } from "@mui/material";
 import AddToCart from "../AddToCart";
 
-const CustomText = styled("div")(({ theme }) => ({
-  color: theme.palette.info.light,
+const CustomText = styled('div')(({ theme }) => ({
+  color: theme.palette.info.light
 }));
 
 interface ProductDetailProps {
@@ -44,15 +44,10 @@ function ProductDetail(props: ProductDetailProps) {
               <ProductImages />
             </Box>
           </Grid>
-          <Grid item xs={12} md={6} sm={12}>
-            <Box
-              sx={{
-                paddingLeft: { md: "30px", xs: "10px" },
-                marginLeft: { xs: "20%", sm: "30%", md: 0 },
-              }}
-            >
-              <Box sx={{ marginTop: { xs: 5, sm: 5, md: 0 } }}>
-                <Typography component="div" variant="h4">
+          <Grid item xs={12} md={6} sm={12} >
+            <Box sx={{ paddingLeft: { md: '30px', xs: '10px' }, marginLeft:{xs:'20%', sm:'30%', md:0} }}>
+              <Box sx={{marginTop:{xs:5, sm:5, md:0}  }}  >
+                <Typography component="div" variant='h4'>
                   <Box>{title} </Box>
                 </Typography>
               </Box>
@@ -84,15 +79,8 @@ function ProductDetail(props: ProductDetailProps) {
               >
                 ${price}.00
               </Typography>
-              <CustomText>
-                <Box
-                  sx={{
-                    marginTop: 3,
-                    fontWeight: "300",
-                    fontSize: 20,
-                    textAlign: "justify",
-                  }}
-                >
+              <CustomText >
+                <Box sx={{ marginTop: 3, fontWeight: '300', fontSize: 20, textAlign: 'justify' }}>
                   {description}
                 </Box>
               </CustomText>
