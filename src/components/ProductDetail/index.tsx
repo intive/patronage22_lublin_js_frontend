@@ -11,19 +11,25 @@ import StarIcon from "@mui/icons-material/Star";
 import { Stack } from "@mui/material";
 import AddToCart from "../AddToCart";
 
-const CustomText = styled(Typography)(({ theme }) => ({
+const CustomText = styled("div")(({ theme }) => ({
   color: theme.palette.info.light,
 }));
 
 interface ProductDetailProps {
   id: number;
   price: string;
-  photos: string;
+  photos: string[];
   title: string;
   description: string;
 }
 
 function ProductDetail(props: ProductDetailProps) {
+  const { photos, title, price, description } = props;
+  const [value, setValue] = React.useState("1");
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
+
   return (
     <section>
       <Box sx={{ marginTop: 7 }}>
@@ -46,8 +52,8 @@ function ProductDetail(props: ProductDetailProps) {
               }}
             >
               <Box sx={{ marginTop: { xs: 5, sm: 5, md: 0 } }}>
-                <Typography variant="h4">
-                  <Box>{props.title}</Box>
+                <Typography component="div" variant="h4">
+                  <Box>{title} </Box>
                 </Typography>
               </Box>
               <Box
@@ -76,9 +82,9 @@ function ProductDetail(props: ProductDetailProps) {
                 sx={{ fontSize: 25, marginTop: 3, color: "#003E7D" }}
                 component="div"
               >
-                ${props.price}.00
+                ${price}.00
               </Typography>
-              <CustomText variant="inherit">
+              <CustomText>
                 <Box
                   sx={{
                     marginTop: 3,
@@ -87,7 +93,7 @@ function ProductDetail(props: ProductDetailProps) {
                     textAlign: "justify",
                   }}
                 >
-                  {props.description}
+                  {description}
                 </Box>
               </CustomText>
               <Box sx={{ marginTop: 3 }}>
