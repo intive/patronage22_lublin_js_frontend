@@ -12,7 +12,7 @@ interface ProductDetailsProps {
 export async function loadProducts() {
   try {
     const { data }: ProductDataProps = await axios.get(
-      `${CONSTANTS.URL}/api/products/getAllPublishedProductsExternal`
+      `${CONSTANTS.URL}/api/products`
     );
     return data;
   } catch (error) {

@@ -201,7 +201,7 @@ export const getStaticProps: GetStaticProps = async () => {
         title: product.title,
         description: product.description,
         id: product.id,
-        photos: product.photos[0].url,
+        photos: product.photos ? product.photos[0].url : null,
         price: product.price,
         categoryId: product.categoryId,
       })),
