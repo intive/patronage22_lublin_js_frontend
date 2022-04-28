@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
@@ -8,7 +7,8 @@ import Typography from "@mui/material/Typography";
 import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import { Box, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import MainButton from "../MainButton";
+import { getImageUrl } from "../../lib/utils";
+import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 
 const CustomIcon = styled(IconButton)(({ theme }) => ({
   position: "absolute",
@@ -43,20 +43,27 @@ const CustomContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-interface ProductItemProps {
+export interface ProductItemProps {
   id: number;
   photos: string;
   title: string;
   description: string;
   price: number;
+  url?: any;
 }
 
 function ProductItem(props: ProductItemProps) {
+  const { id, photos, title,price} = props;
   const router = useRouter();
 
   function showDetailsHandler() {
-    router.push("/products/" + props.id);
+    router.push("/products/" + id);
   }
+  
+  const handleImageError = (e:any) => {
+    e.target.onerror = null;
+    e.target.src = "https://via.placeholder.com/400x150?text=no+image+available"  
+}
 
   return (
     <div className="item">
@@ -64,9 +71,10 @@ function ProductItem(props: ProductItemProps) {
         <CustomContainer>
           <CardMedia
             component="img"
-            alt={props.title}
-            image={props.photos}
+            image={getImageUrl(photos)}
+            onError={handleImageError}
             sx={{ transition: "all 0.3s linear" }}
+            
           />
           <CustomIcon onClick={showDetailsHandler}>
             <ZoomInOutlinedIcon
@@ -77,7 +85,7 @@ function ProductItem(props: ProductItemProps) {
             />
           </CustomIcon>
         </CustomContainer>
-        <CardContent>
+        <CardContent sx={{ height:'87px' }}>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -85,19 +93,12 @@ function ProductItem(props: ProductItemProps) {
             spacing={2}
           >
             <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
-              {props.title}
+              {title}
             </Typography>
             <Typography sx={{ fontSize: 14 }} gutterBottom component="div">
-              {props.price}.00$
+              {price}.00$
             </Typography>
           </Stack>
-          <MainButton
-            onClick={() => {
-              router.push("/products/" + props.id);
-            }}
-          >
-            Details
-          </MainButton>
         </CardContent>
       </Card>
     </div>

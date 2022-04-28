@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import { useRouter } from "next/router";
 import MainButton from "../MainButton";
 import { Item, CustomIcon, CustomContainer } from "../../styles/styles";
+import { getImageUrl } from "../../lib/utils";
 
 interface ProductListProps {
   products: any[];
@@ -42,7 +43,7 @@ function ListProductsView(props: ProductListProps) {
                 <CardMedia
                   component="img"
                   alt={product.title}
-                  image={product.photos}
+                  image={getImageUrl(product.photos)}
                   sx={{
                     transition: "all 0.3s linear",
                     width: "250px",
