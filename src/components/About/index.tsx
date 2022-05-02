@@ -39,7 +39,7 @@ function About(props: any) {
                 <Grid item xs={12} md={6} marginTop={5}>
                     <Box sx={{ paddingLeft: { md: '30px', xs: '10px' } }}>
                         <Box>
-                            <Typography variant='h4'>
+                            <Typography variant='h4' component='div'>
                                 <Box>Our Story</Box>
                                 <Underline />
                             </Typography>
