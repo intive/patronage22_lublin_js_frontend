@@ -28,12 +28,6 @@ export const addToCart =
           JSON.stringify(getState().cart.cartItems)
         );
       }
-      // useEffect(() => {
-      //   localStorage.setItem(
-      //     "cartItems",
-      //     JSON.stringify(getState().cart.cartItems)
-      //   );
-      // }, [getState().cart.cartItems]);
     } catch (error: any) {
       dispatch({
         type: "CART_FAIL",
@@ -52,13 +46,6 @@ export const removeFromCart =
       type: constants.CART_REMOVE_ITEM,
       payload: id,
     });
-
-    // useEffect(() => {
-    //   localStorage.setItem(
-    //     "cartItems",
-    //     JSON.stringify(getState().cart.cartItems)
-    //   );
-    // }, [getState().cart.cartItems]);
 
     if (typeof window !== "undefined") {
       const cartLenght = localStorage.getItem("cartItems")?.length;
