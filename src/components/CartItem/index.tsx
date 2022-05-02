@@ -25,7 +25,9 @@ interface ProductItemProps {
   title: string;
   description: string;
   price: number;
-  value: string;
+  subtotal: number;
+  value: any;
+  quantitySelectedValue: number;
   onChange: (event: SelectChangeEvent<number>) => void;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -64,7 +66,7 @@ function CartItem(props: ProductItemProps) {
             label=""
             onChange={onChange}
             style={{ height: 30 }}
-            defaultValue={1}
+            defaultValue={props.quantitySelectedValue}
           >
             <MenuItem value="1"></MenuItem>
             {quantities.map((quantity) => {
@@ -82,7 +84,7 @@ function CartItem(props: ProductItemProps) {
           align="left"
           sx={{ display: { xs: "none", md: "table-cell" } }}
         >
-          {price}
+          {props.subtotal}
         </Typography>
       </TableCell>
       <TableCell align="left">

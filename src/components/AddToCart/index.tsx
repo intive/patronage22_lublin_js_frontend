@@ -57,7 +57,7 @@ const AddToCart = (props: AddToCartProps) => {
   };
 
   const addToCartHandler = () => {
-    router.push(`/cart?id=${props.id}`);
+    router.push(`/cart?id=${props.id}?qty=${count}`);
   };
 
   return (

@@ -13,12 +13,15 @@ import CartTotals from "../../components/CartTotals";
 import { Grid } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useDispatch, useSelector } from "react-redux";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { addToCart, removeFromCart } from "../../actions/cartActions";
-import { ProductionQuantityLimitsSharp } from "@mui/icons-material";
 
 function CartPage() {
-  const [quantity, setQuantity] = useState("1");
+  const [quantity, setQuantity] = useState(
+    typeof window !== "undefined" && location.search
+      ? Number(location.search.split("=")[2])
+      : 1
+  );
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -28,17 +31,18 @@ function CartPage() {
   const cart = useSelector((state: any) => state.cart);
   const { cartItems } = cart;
 
-  console.log(quantity);
-  console.log(cartItems);
-  console.log(cartItems.length);
-  console.log(productId);
-  console.log(router);
+  let totalPrice = 0;
+  let deliveryCost = 12.99;
+
+  cartItems?.forEach((item: any) => {
+    totalPrice += item.price * item.quantity;
+  });
+
+  let orderTotal = totalPrice + deliveryCost;
 
   const removeFromCartHandler = (id: any) => {
     dispatch(removeFromCart(id));
   };
-
-  //const qtv = location.search ? Number(location.search.split("=")[1]) : 1;
 
   useEffect(() => {
     if (productId) {
@@ -46,7 +50,7 @@ function CartPage() {
       router.asPath === `/cart?id=${productId.toString()}` &&
         router.push("/cart");
     }
-  }, [dispatch, productId, quantity, router]);
+  }, [dispatch, productId, quantity, router, cartItems]);
 
   const handleChange = (event: any) => {
     setQuantity(event.target.value);
@@ -54,7 +58,7 @@ function CartPage() {
   const clearCartHandler = () => {
     localStorage.removeItem("cartItems");
     window.location.reload();
-    setQuantity("");
+    setQuantity(1);
   };
 
   return (
@@ -91,25 +95,29 @@ function CartPage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {cartItems.length === 0 ? (
-                  <p>Your cart is empty</p>
+                {cartItems?.length === 0 ? (
+                  <p>Your Cart Is Empty</p>
                 ) : (
-                  cartItems.map((item: any) => (
+                  cartItems?.map((item: any) => (
                     <TableRow
-                      key={item.id}
                       sx={{
                         "&:last-child td, &:last-child th": { border: 0 },
                       }}
                     >
                       <CartItem
+                        key={item.id}
                         id={item.id}
                         photos={item.photos?.url}
                         title={item.title}
                         description={item.description}
                         price={item.price}
                         onClick={() => removeFromCartHandler(item.id)}
-                        onChange={handleChange}
-                        value={quantity}
+                        onChange={(e: any) =>
+                          dispatch(addToCart(item.id, Number(e.target.value)))
+                        }
+                        value={quantity.toString()}
+                        quantitySelectedValue={item.quantity}
+                        subtotal={item.price * item.quantity}
                       />
                     </TableRow>
                   ))
@@ -133,7 +141,11 @@ function CartPage() {
         <Grid container sx={{ marginTop: 5 }}>
           <Grid item xs={6} md={9} />
           <Grid item xs={6} md={3}>
-            <CartTotals />
+            <CartTotals
+              subTotal={totalPrice}
+              deliveryCost={deliveryCost}
+              orderTotal={orderTotal}
+            />
           </Grid>
         </Grid>
       </Box>

@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -20,20 +21,17 @@ const rootReducer = combineReducers({
 });
 
 let userInfoFromStorage;
-let cartItemsFromStorage = <any>[];
+let cartItemsFromStorage: any;
 let shippingAddressFromStorage = {};
 let paymentMethodFromStorage = {};
 
 if (typeof window !== "undefined") {
-  userInfoFromStorage = localStorage.getItem("userInfo")
-    ? JSON.stringify(localStorage.getItem("userInfo"))
-    : null;
+  userInfoFromStorage = localStorage.getItem("userInfo");
 }
 
 if (typeof window !== "undefined") {
-  cartItemsFromStorage = localStorage.getItem("cartItems")
-    ? JSON.stringify(localStorage.getItem("cartItems"))
-    : [];
+  const cartData: any = localStorage.getItem("cartItems");
+  cartItemsFromStorage = cartData ? JSON.parse(cartData) : [];
 }
 
 if (typeof window !== "undefined") {

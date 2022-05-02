@@ -5,7 +5,7 @@ interface Cart {
 }
 
 export const cartReducer = (
-  state = { cartItems: <Cart[]>[], shippingAddress: {}, paymentMethod: {} },
+  state = { cartItems: <any>[], shippingAddress: {}, paymentMethod: {} },
   action: any
 ) => {
   switch (action.type) {
