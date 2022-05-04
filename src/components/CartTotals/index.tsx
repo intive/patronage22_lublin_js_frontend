@@ -9,7 +9,13 @@ import MainButton from "../MainButton";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 
-function CartTotals() {
+interface CartTotalsProps {
+  subTotal: number;
+  deliveryCost: number;
+  orderTotal: number;
+}
+
+function CartTotals(props: CartTotalsProps) {
   const userLogin = useSelector((state: any) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -33,7 +39,7 @@ function CartTotals() {
                 color="text.secondary"
                 gutterBottom
               >
-                25.00 $
+                {props.subTotal.toFixed(2)}$
               </Typography>
             </Grid>
           </Grid>
@@ -53,7 +59,7 @@ function CartTotals() {
                 color="text.secondary"
                 gutterBottom
               >
-                12.99 $
+                {props.deliveryCost.toFixed(2)}$
               </Typography>
             </Grid>
           </Grid>
@@ -63,7 +69,9 @@ function CartTotals() {
               <Typography variant="h6">Order Total:</Typography>
             </Grid>
             <Grid item xs={6}>
-              <Typography variant="h6">37.99 $</Typography>
+              <Typography variant="h6">
+                {props.orderTotal.toFixed(2)}$
+              </Typography>
             </Grid>
           </Grid>
         </CardContent>

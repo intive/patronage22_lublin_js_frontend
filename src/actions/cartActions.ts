@@ -1,31 +1,42 @@
+import React, { useEffect } from "react";
 import * as constants from "../types/cartConstants";
 import { ThunkAction } from "redux-thunk";
 import { AnyAction } from "redux";
 import { RootState } from "../store";
 import { loadProductDetails } from "../lib/products";
 
-export let userCart: [];
-export let userShippingAddress: {};
-export let userPaymentMethod: {};
-
 export const addToCart =
-  (id: any): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (id: any, quantity: any): ThunkAction<void, RootState, unknown, AnyAction> =>
   async (dispatch, getState) => {
-    const data = await loadProductDetails(id);
+    try {
+      const data = await loadProductDetails(id);
 
-    dispatch({
-      type: constants.CART_ADD_ITEM,
-      payload: {
-        product: data.id,
-        title: data.title,
-        category: data.category,
-        photos: data.photos,
-        price: data.price,
-        quantity: data.quantity,
-      },
-    });
+      dispatch({
+        type: constants.CART_ADD_ITEM,
+        payload: {
+          id: data?.id,
+          title: data?.title,
+          photos: data?.photos[0],
+          price: data?.price,
+          quantity,
+        },
+      });
 
-    userCart = getState().cart.cartItems;
+      if (typeof window !== "undefined") {
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(getState().cart.cartItems)
+        );
+      }
+    } catch (error: any) {
+      dispatch({
+        type: "CART_FAIL",
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
   };
 
 export const removeFromCart =
@@ -36,7 +47,17 @@ export const removeFromCart =
       payload: id,
     });
 
-    userCart = getState().cart.cartItems;
+    if (typeof window !== "undefined") {
+      const cartLenght = localStorage.getItem("cartItems")?.length;
+      if (cartLenght === 0) {
+        localStorage.removeItem("cartItems");
+      } else {
+        localStorage.setItem(
+          "cartItems",
+          JSON.stringify(getState().cart.cartItems)
+        );
+      }
+    }
   };
 
 export const saveShippingAddress =
@@ -47,7 +68,9 @@ export const saveShippingAddress =
       payload: data,
     });
 
-    userShippingAddress = data;
+    if (typeof window !== "undefined") {
+      localStorage.setItem("shippingAddress", JSON.stringify(data));
+    }
   };
 
 export const savePaymentMethod =
@@ -58,5 +81,7 @@ export const savePaymentMethod =
       payload: data,
     });
 
-    userPaymentMethod = data;
+    if (typeof window !== "undefined") {
+      localStorage.setItem("paymentMethod", JSON.stringify(data));
+    }
   };

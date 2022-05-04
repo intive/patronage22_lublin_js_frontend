@@ -1,5 +1,9 @@
 import * as constants from "../types/cartConstants";
 
+interface Cart {
+  cartItems: [];
+}
+
 export const cartReducer = (
   state = { cartItems: <any>[], shippingAddress: {}, paymentMethod: {} },
   action: any
@@ -8,15 +12,13 @@ export const cartReducer = (
     case constants.CART_ADD_ITEM:
       const item = action.payload;
 
-      const existItem: any = state.cartItems.find(
-        (x: any) => x.product === item.product
-      );
+      const existItem: any = state.cartItems.find((x: any) => x.id === item.id);
 
       if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((x: any) =>
-            x.product === existItem.product ? item : x
+            x.id === existItem.id ? item : x
           ),
         };
       } else {
@@ -29,9 +31,7 @@ export const cartReducer = (
     case constants.CART_REMOVE_ITEM:
       return {
         ...state,
-        cartItems: state.cartItems.filter(
-          (x: any) => x.product !== action.payload
-        ),
+        cartItems: state.cartItems.filter((x: any) => x.id !== action.payload),
       };
     case constants.CART_SAVE_SHIPPING_ADDRESS:
       return {
