@@ -16,9 +16,20 @@ import FaceIcon from "@mui/icons-material/Face";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
+import Badge, { BadgeProps } from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
 
 const pages = ["Home", "Products", "About", "Contact"];
 const settings = ["Profile", "Account", "Dashboard"];
+
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
 
 const MainNavigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -27,6 +38,9 @@ const MainNavigation = () => {
   const userLogin = useSelector((state: any) => state.userLogin);
   const { userInfo } = userLogin;
   const dispatch = useDispatch();
+
+  const cart = useSelector((state: any) => state.cart);
+  const { cartItems } = cart;
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -140,8 +154,10 @@ const MainNavigation = () => {
           {userInfo ? (
             <Box sx={{ flexGrow: 0 }}>
               <Link href="/cart">
-                <Button color="inherit">
-                  <ShoppingCartIcon /> Cart
+                <Button color='inherit'>
+                  <StyledBadge badgeContent={cartItems?.length > 0 ? cartItems?.length : '0'} color="secondary">
+                    <ShoppingCartIcon />
+                  </StyledBadge>
                 </Button>
               </Link>
               <IconButton
@@ -184,8 +200,10 @@ const MainNavigation = () => {
           ) : (
             <Box sx={{ flexGrow: 0 }}>
               <Link href="/cart">
-                <Button color="inherit">
-                  <ShoppingCartIcon /> Cart
+                <Button color='inherit'>
+                  <StyledBadge badgeContent={cartItems?.length > 0 ? cartItems?.length : '0'} color="secondary">
+                    <ShoppingCartIcon />
+                  </StyledBadge>
                 </Button>
               </Link>
               <Link href="/login">
