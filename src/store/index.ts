@@ -48,6 +48,7 @@ if (typeof window !== "undefined") {
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
+  userRegister: { userInfo: userInfoFromStorage },
   cart: {
     cartItems: cartItemsFromStorage,
     shippingAddress: shippingAddressFromStorage,

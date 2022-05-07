@@ -89,7 +89,7 @@ function LoginForm() {
         <FormControl className="actions">
           <Button type="submit">{loading ? "Loading..." : "Login"}</Button>
         </FormControl>
-        {error && <p>{error}</p>}
+        {error && <p className="error">{error}</p>}
         {loading && <p>Loading...</p>}
         <p>
           New Customer? <Link href="/register">Register</Link>

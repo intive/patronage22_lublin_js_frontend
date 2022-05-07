@@ -28,7 +28,15 @@ export const registerUserRequest = async (
         "Content-Type": "application/json",
       },
     });
-  } catch (error) {
-    throw new Error("Something went wrong...");
+  } catch (error: any) {
+    //throw new Error("Something went wrong...");
+    console.log(error.response);
+    if (error.response.status === 422) {
+      throw new Error(
+        "Password must contain at least 8 characters, number and upper case letter"
+      );
+    } else {
+      throw new Error("Email already exists");
+    }
   }
 };
