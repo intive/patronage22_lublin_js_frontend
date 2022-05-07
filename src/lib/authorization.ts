@@ -29,8 +29,6 @@ export const registerUserRequest = async (
       },
     });
   } catch (error: any) {
-    //throw new Error("Something went wrong...");
-    console.log(error.response);
     if (error.response.status === 422) {
       throw new Error(
         "Password must contain at least 8 characters, number and upper case letter"

@@ -32,8 +32,6 @@ function RegisterForm() {
   const userRegister = useSelector((state: any) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  console.log(error);
-
   useEffect(() => {
     if (userInfo) {
       router.push("/");
