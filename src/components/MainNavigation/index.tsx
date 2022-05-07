@@ -16,18 +16,18 @@ import FaceIcon from "@mui/icons-material/Face";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
-import Badge, { BadgeProps } from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
+import Badge, { BadgeProps } from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
 
 const pages = ["Home", "Products", "About", "Contact"];
 const settings = ["Profile", "Account", "Dashboard"];
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
-  '& .MuiBadge-badge': {
+  "& .MuiBadge-badge": {
     right: -3,
     top: 13,
     border: `2px solid ${theme.palette.background.paper}`,
-    padding: '0 4px',
+    padding: "0 4px",
   },
 }));
 
@@ -41,6 +41,12 @@ const MainNavigation = () => {
 
   const cart = useSelector((state: any) => state.cart);
   const { cartItems } = cart;
+
+  let totalCartItems: number = 0;
+
+  cartItems?.forEach((item: any) => {
+    totalCartItems += item.quantity;
+  });
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -103,7 +109,7 @@ const MainNavigation = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" component='div'>
+                  <Typography textAlign="center" component="div">
                     <Link
                       href={
                         page === "Home" ? "/" : `/${page.toLocaleLowerCase()}`
@@ -154,8 +160,12 @@ const MainNavigation = () => {
           {userInfo ? (
             <Box sx={{ flexGrow: 0 }}>
               <Link href="/cart">
-                <Button color='inherit'>
-                  <StyledBadge badgeContent={cartItems?.length > 0 ? cartItems?.length : '0'} color="secondary">
+                <Button color="inherit">
+                  Cart
+                  <StyledBadge
+                    badgeContent={totalCartItems === 0 ? "0" : totalCartItems}
+                    color="primary"
+                  >
                     <ShoppingCartIcon />
                   </StyledBadge>
                 </Button>
@@ -200,8 +210,12 @@ const MainNavigation = () => {
           ) : (
             <Box sx={{ flexGrow: 0 }}>
               <Link href="/cart">
-                <Button color='inherit'>
-                  <StyledBadge badgeContent={cartItems?.length > 0 ? cartItems?.length : '0'} color="secondary">
+                <Button color="inherit">
+                  Cart
+                  <StyledBadge
+                    badgeContent={totalCartItems === 0 ? "0" : totalCartItems}
+                    color="primary"
+                  >
                     <ShoppingCartIcon />
                   </StyledBadge>
                 </Button>
