@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductList from "../../components/ProductList";
 import { GetStaticProps } from "next";
 import { InferGetStaticPropsType } from "next";
@@ -17,9 +17,7 @@ import Sort from "../../components/Sort";
 import { SelectChangeEvent } from "@mui/material";
 import { getCategories } from "../../lib/categories";
 import { Category } from "../../types/models";
-
-
-
+import { number } from "yup";
 
 
 const categoryAll: Category = {
@@ -58,9 +56,11 @@ function ProductsPage({
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [categoriesList, setCategoriesList] = useState<Category[]>(categories);
   const [categoryId, setCategoryId] = useState<number>(0);
+  const [productList, setProductList] = useState(products)
 
   const handleSliderChange = (event: any, newValue: any) => {
     setPrice(newValue);
+    setProductList(products.filter((product: any) => product.price <= newValue))
   };
 
   const handleCompanyChange = (event: SelectChangeEvent<string>) => {
@@ -69,10 +69,17 @@ function ProductsPage({
 
   const handleCategoryChange = (event: SelectChangeEvent<number | null>) => {
     setCategoryId(event.target.value as number);
+    setProductList(event.target.value as number === 0 ? products : products.filter((product: any) => product.categoryId === event.target.value as number))
   };
 
   const handleSortChange = (event: SelectChangeEvent<string>) => {
     setSortCondition(event.target.value);
+  };
+
+  const handleSearchChange = (event: any) => {
+    setSearchTerm(event.target.value);
+    setProductList(products.filter((product: any) => product.title.toLocaleLowerCase()
+      .includes(event.target.value.toLocaleLowerCase())))
   };
 
   const handleListView = () => {
@@ -88,7 +95,9 @@ function ProductsPage({
     setSortCondition("");
     setSearchTerm("");
     setCategoryId(0);
+    setProductList(products)
   };
+
   return (
     <section>
       <h2>
@@ -98,9 +107,7 @@ function ProductsPage({
         <Grid container spacing={2}>
           <Grid item xs={12} md={3}>
             <SearchBar
-              onChange={(event: any) => {
-                setSearchTerm(event.target.value);
-              }}
+              onChange={handleSearchChange}
             />
             <h4>Category</h4>
             <Categories
@@ -146,7 +153,7 @@ function ProductsPage({
                 onClick={handleListView}
               />
               <p style={{ marginRight: "0.5rem" }}>
-                {products.length} products found
+                {productList.length} products found
               </p>
               <div
                 style={{
@@ -160,7 +167,7 @@ function ProductsPage({
               <Sort onChange={handleSortChange} value={sortCondition} />
             </Box>
             <div id="products">
-              {!isListView ? (
+              {productList.length === 0 ? <p>Nothing was found</p> : !isListView ? (
                 <ProductList
                   searchTerm={searchTerm}
                   price={price}
@@ -214,7 +221,7 @@ export const getStaticProps: GetStaticProps = async () => {
         photos: product.photos || null,
         price: product.price,
         categoryId: product.categoryId,
-      })),
+      })) || [],
       categories:
         categories?.map((category: Category) => ({
           id: category.id,
@@ -226,3 +233,5 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default ProductsPage;
+
+
