@@ -19,7 +19,7 @@
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.26.1",
     "formik": "^2.2.9",
-    "next": "10.0.6",
+    "next": "^12.1.6",
     "postcss": "^8.4.12",
     "react": "17.0.1",
     "react-dom": "17.0.1",
