@@ -5,10 +5,13 @@ import {
   Input,
   Button,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import Link from "next/link";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../actions/userActions";
+import { useRouter } from "next/router";
 
 interface MyFormValues {
   name: string;
@@ -22,6 +25,18 @@ function RegisterForm() {
     email: "",
     password: "",
   };
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const userRegister = useSelector((state: any) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push("/");
+    }
+  }, [router, userInfo]);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().max(255).required("Name is required"),
@@ -37,6 +52,7 @@ function RegisterForm() {
     onSubmit(values) {
       const payload = { ...values };
       console.log(payload);
+      dispatch(register(values.name, values.email, values.password));
     },
     validationSchema,
   });
@@ -86,8 +102,10 @@ function RegisterForm() {
         </FormControl>
 
         <FormControl className="actions">
-          <Button type="submit">Register</Button>
+          <Button type="submit">{loading ? "Loading..." : "Register"}</Button>
         </FormControl>
+        {error && <p className="error">{error}</p>}
+        {loading && <p>Loading...</p>}
         <p>
           Already have an account? <Link href="/login">Login</Link>
         </p>
