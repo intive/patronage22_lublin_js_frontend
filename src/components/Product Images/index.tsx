@@ -1,69 +1,7 @@
 import React, { useState } from 'react'
 import Typography from "@mui/material/Typography";
 import { styled } from '@mui/material/styles';
-
-
-// const main =
-//     [
-//         {
-//             'id': '1',
-//             'url':
-//                 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80'
-//         },
-//         {
-//             'id': '2',
-//             'url':
-//                 'https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80'
-//         },
-//         {
-//             'id': '3',
-//             'url':
-//                 'https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80'
-//         },
-//         {
-//             'id': '4',
-//             'url':
-//                 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
-//         },
-//         {
-//             'id': '5',
-//             'url': 'https://images.unsplash.com/photo-1583209814683-c023dd293cc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
-//         }
-//     ]
-
-const images =
-    [
-        {
-            'id': '1',
-            'label': 'Mockup cosmetics',
-            'url': 'https://images.unsplash.com/photo-1583209814683-c023dd293cc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
-        },
-        {
-            'id': '2',
-            'label': 'Teftiba Furniture',
-            'url':
-                'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
-        },
-        {
-            'id': '3',
-            'label': 'Alisa Anton Flowers',
-            'url':
-                'https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80'
-        },
-        {
-            'id': '4',
-            'label': 'Lucas Favre',
-            'url':
-                'https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80'
-        },
-        {
-            'id': '5',
-            'label': 'Clark Street Mercantile',
-            'url':
-                'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80'
-        },
-    ]
-
+import { CONSTANTS } from '../../types/constants';
 
 const CustomText = styled(Typography)(({ theme }) => ({
     color: theme.palette.info.light
@@ -103,30 +41,34 @@ const Gallery = styled('div')(({ theme }) => ({
     }
 }));
 const ImageTab = styled('img')(({ theme }) => ({
-    width:'100%',
-    borderRadius:'7%',
-    height:'75px',
+    width: '100%',
+    borderRadius: '7%',
+    height: '75px',
 }));
 
+interface ProductImagesProps {
+    images: any;
+}
 
-const ProductImages: React.FC = (props: any) => {
-    
 
-    const [mainImage, setMainImage] = useState(images[0])
+const ProductImages = (props: ProductImagesProps) => {
+
+
+    const [mainImage, setMainImage] = useState(props.images[0])
     return (
         <>
-            <MainImage src={mainImage.url} alt='' className='mainImage ' />
+            <MainImage src={`${CONSTANTS.URL}/${mainImage?.url}`} alt='' className='mainImage ' />
             {/* <MainImage src={props.photos} alt='' className='mainImage ' /> */}
             <Gallery className='gallery'>
-                {images && images.map((image:
-                    { id: any, label: any, url: any; }, index) => {
+                {props.images && props.images.map((image:
+                    { id: any, label: any, url: any; }, index: any) => {
                     return (
                         <ImageTab
-                            src={image.url}
+                            src={`${CONSTANTS.URL}/${image?.url}`}
                             alt=''
                             key={index}
-                            className={`${image.url === mainImage.url ? 'active' : null}`}
-                            onClick={() => setMainImage(images[index])}
+                            className={`${CONSTANTS.URL}/${image?.url} === ${CONSTANTS.URL}/${mainImage?.url} ? 'active' : null`}
+                            onClick={() => setMainImage(props.images[index])}
                         />
                     )
                 })}

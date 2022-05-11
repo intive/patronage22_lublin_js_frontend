@@ -7,6 +7,7 @@ import { loadProductDetails, loadProducts } from "../../lib/products";
 function ProductDetailPage({
   productDetails,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+
   return (
     <section>
       <h2>

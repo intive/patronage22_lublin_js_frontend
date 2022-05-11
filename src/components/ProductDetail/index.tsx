@@ -11,6 +11,39 @@ import StarIcon from "@mui/icons-material/Star";
 import { Stack } from "@mui/material";
 import AddToCart from "../AddToCart";
 
+const images =
+  [
+    {
+      'id': '1',
+      'label': 'Mockup cosmetics',
+      'url': 'https://images.unsplash.com/photo-1583209814683-c023dd293cc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
+    },
+    {
+      'id': '2',
+      'label': 'Teftiba Furniture',
+      'url':
+        'https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
+    },
+    {
+      'id': '3',
+      'label': 'Alisa Anton Flowers',
+      'url':
+        'https://images.unsplash.com/photo-1589244159943-460088ed5c92?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2090&q=80'
+    },
+    {
+      'id': '4',
+      'label': 'Lucas Favre',
+      'url':
+        'https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1624&q=80'
+    },
+    {
+      'id': '5',
+      'label': 'Clark Street Mercantile',
+      'url':
+        'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80'
+    },
+  ]
+
 const CustomText = styled('div')(({ theme }) => ({
   color: theme.palette.info.light
 }));
@@ -18,7 +51,7 @@ const CustomText = styled('div')(({ theme }) => ({
 interface ProductDetailProps {
   id: number;
   price: string;
-  photos: string[];
+  photos: any;
   title: string;
   description: string;
 }
@@ -41,12 +74,12 @@ function ProductDetail(props: ProductDetailProps) {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} sm={12}>
             <Box>
-              <ProductImages />
+              <ProductImages images={photos} />
             </Box>
           </Grid>
           <Grid item xs={12} md={6} sm={12} >
-            <Box sx={{ paddingLeft: { md: '30px', xs: '10px' }, marginLeft:{xs:'20%', sm:'30%', md:0} }}>
-              <Box sx={{marginTop:{xs:5, sm:5, md:0}  }}  >
+            <Box sx={{ paddingLeft: { md: '30px', xs: '10px' }, marginLeft: { xs: '20%', sm: '30%', md: 0 } }}>
+              <Box sx={{ marginTop: { xs: 5, sm: 5, md: 0 } }}  >
                 <Typography component="div" variant='h4'>
                   <Box>{title} </Box>
                 </Typography>
