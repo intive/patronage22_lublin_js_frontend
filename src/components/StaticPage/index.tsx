@@ -37,7 +37,7 @@ function StaticPage(props: StaticPageProps) {
           <Box sx={{ width: "100%", bordeRadius: "7%" }}>
             <StyledImage
               className='about-image'
-              src='https://images.unsplash.com/photo-1605371924599-2d0365da1ae0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'
+              src='https://images.unsplash.com/photo-1525598912003-663126343e1f?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740'
               alt=''
             />
           </Box>
@@ -60,6 +60,9 @@ function StaticPage(props: StaticPageProps) {
                 }}
               >
                 {props.description}
+              </Box>
+              <Box sx={{ marginTop: 5, fontWeight: '300', fontSize: 20, textAlign: 'justify' }}>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat accusantium sapiente tempora sed dolore esse deserunt eaque excepturi, delectus error accusamus vel eligendi, omnis beatae. Quisquam, dicta. Eos quod quisquam esse recusandae vitae neque dolore, obcaecati incidunt sequi blanditiis est exercitationem molestiae delectus saepe odio eligendi modi porro eaque in libero minus unde sapiente consectetur architecto.
               </Box>
             </CustomText>
           </Box>
