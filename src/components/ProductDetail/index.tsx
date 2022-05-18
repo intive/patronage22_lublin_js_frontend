@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import MainButton from "../MainButton";
 import Link from "next/link";
-import ProductImages from "../Product Images";
+import ProductImages from "../ProductImages";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import { Stack } from "@mui/material";
@@ -18,7 +18,7 @@ const CustomText = styled('div')(({ theme }) => ({
 interface ProductDetailProps {
   id: number;
   price: string;
-  photos: string[];
+  photos: any;
   title: string;
   description: string;
 }
@@ -41,12 +41,12 @@ function ProductDetail(props: ProductDetailProps) {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} sm={12}>
             <Box>
-              <ProductImages />
+              <ProductImages images={photos} />
             </Box>
           </Grid>
           <Grid item xs={12} md={6} sm={12} >
-            <Box sx={{ paddingLeft: { md: '30px', xs: '10px' }, marginLeft:{xs:'20%', sm:'30%', md:0} }}>
-              <Box sx={{marginTop:{xs:5, sm:5, md:0}  }}  >
+            <Box sx={{ paddingLeft: { md: '30px', xs: '10px' }, marginLeft: { xs: '20%', sm: '30%', md: 0 } }}>
+              <Box sx={{ marginTop: { xs: 5, sm: 5, md: 0 } }}  >
                 <Typography component="div" variant='h4'>
                   <Box>{title} </Box>
                 </Typography>
