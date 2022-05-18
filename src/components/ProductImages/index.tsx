@@ -55,9 +55,13 @@ const ProductImages = (props: ProductImagesProps) => {
 
 
     const [mainImage, setMainImage] = useState(props.images[0])
+    const handleImageError = (e:any) => {
+        e.target.onerror = null;
+        e.target.src = "https://via.placeholder.com/800x450?text=no+image+available"  
+    }
     return (
         <>
-            <MainImage src={`${CONSTANTS.URL}/${mainImage?.url}`} alt='' className='mainImage ' />
+            <MainImage src={`${CONSTANTS.URL}/${mainImage?.url}`} alt='' className='mainImage'  onError={handleImageError} />
             {/* <MainImage src={props.photos} alt='' className='mainImage ' /> */}
             <Gallery className='gallery'>
                 {props.images && props.images.map((image:
@@ -69,6 +73,7 @@ const ProductImages = (props: ProductImagesProps) => {
                             key={index}
                             className={`${CONSTANTS.URL}/${image?.url} === ${CONSTANTS.URL}/${mainImage?.url} ? 'active' : null`}
                             onClick={() => setMainImage(props.images[index])}
+                           
                         />
                     )
                 })}

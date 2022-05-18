@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import MainButton from "../MainButton";
 import Link from "next/link";
-import ProductImages from "../Product Images";
+import ProductImages from "../ProductImages";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import { Stack } from "@mui/material";
