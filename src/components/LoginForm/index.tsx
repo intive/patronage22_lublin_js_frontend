@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
+import MainButton from "../MainButton";
 
 interface MyFormValues {
   email: string;
@@ -86,8 +87,8 @@ function LoginForm() {
           {errors.password && <p className="error">{errors.password}</p>}
         </FormControl>
 
-        <FormControl className="actions">
-          <Button type="submit">{loading ? "Loading..." : "Login"}</Button>
+        <FormControl>
+          <MainButton type="submit">{loading ? "Loading..." : "LOGIN"}</MainButton>
         </FormControl>
         {error && <p className="error">{error}</p>}
         {loading && <p>Loading...</p>}

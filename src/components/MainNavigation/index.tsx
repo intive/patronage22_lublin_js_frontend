@@ -20,7 +20,7 @@ import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 
 const pages = ["Home", "Products", "About", "Contact"];
-const settings = ["Profile", "Account", "Dashboard"];
+const settings = ["Profile", "Order History"];
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -176,9 +176,8 @@ const MainNavigation = () => {
                 sx={{ size: "medium", p: 0, ml: 2 }}
               >
                 <Avatar src="/broken-image.jpg"
-                  sx={{ color: 'white', bgcolor: '#0056ad' }}
+                  sx={{ color: 'white', bgcolor: '#0056ad', width: 24, height: 24 }}
                 />
-
               </IconButton>
               <Menu
                 sx={{ mt: "45px" }}

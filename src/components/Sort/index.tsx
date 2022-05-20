@@ -13,7 +13,8 @@ function Sort(props: SortProsp) {
       <Select
         displayEmpty
         id="demo-controlled-open-select"
-        value={props.value}
+        // value={props.value}
+        value={"low-price"}
         label="Sort"
         onChange={props.onChange}
         style={{ height: 30 }}
