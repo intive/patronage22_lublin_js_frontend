@@ -63,6 +63,7 @@ const MainNavigation = () => {
     setAnchorElUser(null);
   };
 
+
   return (
     <AppBar position="static" className="app-bar">
       <Container maxWidth="lg" sx={{ mt: 3 }}>
@@ -172,9 +173,12 @@ const MainNavigation = () => {
               </Link>
               <IconButton
                 onClick={handleOpenUserMenu}
-                sx={{ size: "medium", p: 0 }}
+                sx={{ size: "medium", p: 0, ml: 2 }}
               >
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar src="/broken-image.jpg"
+                  sx={{ color: 'white', bgcolor: '#0056ad' }}
+                />
+
               </IconButton>
               <Menu
                 sx={{ mt: "45px" }}
