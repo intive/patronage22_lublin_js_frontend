@@ -20,7 +20,7 @@ import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 
 const pages = ["Home", "Products", "About", "Contact"];
-const settings = ["Profile", "Order History"];
+const settings = ["Profile", "Orders"];
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -197,7 +197,11 @@ const MainNavigation = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center">
+                    <Link href={`/${setting.toLocaleLowerCase()}`}>
+                    <div className="nav-link">{setting}</div>
+                      </Link>
+                      </Typography>
                   </MenuItem>
                 ))}
                 <MenuItem

@@ -102,7 +102,7 @@ function RegisterForm() {
           {errors.password && <p className="error">{errors.password}</p>}
         </FormControl>
         <FormControl>
-          <MainButton type="submit">{loading ? "Loading..." : "REGISTER"}</MainButton>
+          <MainButton  onClick={handleSubmit} type="submit">{loading ? "Loading..." : "REGISTER"}</MainButton>
         </FormControl>
         {error && <p className="error">{error}</p>}
         {loading && <p>Loading...</p>}

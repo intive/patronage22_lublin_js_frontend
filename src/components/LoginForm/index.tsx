@@ -88,7 +88,7 @@ function LoginForm() {
         </FormControl>
 
         <FormControl>
-          <MainButton type="submit">{loading ? "Loading..." : "LOGIN"}</MainButton>
+          <MainButton onClick={handleSubmit} type="submit">{loading ? "Loading..." : "LOGIN"}</MainButton>
         </FormControl>
         {error && <p className="error">{error}</p>}
         {loading && <p>Loading...</p>}
