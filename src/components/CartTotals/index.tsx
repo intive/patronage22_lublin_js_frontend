@@ -76,7 +76,7 @@ function CartTotals(props: CartTotalsProps) {
           </Grid>
         </CardContent>
         <CardActions sx={{ display: "grid" }}>
-          <Link href={userInfo ? "/checkout" : "/login"} passHref>
+          <Link href={userInfo ? "/shipping" : "/login"} passHref>
             <MainButton>
               {userInfo
                 ? "proceed to checkout".toLocaleUpperCase()
