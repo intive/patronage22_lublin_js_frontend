@@ -61,17 +61,29 @@ export const removeFromCart =
   };
 
 export const saveShippingAddress =
-  (data: any): ThunkAction<void, RootState, unknown, AnyAction> =>
+(
+  fullName: string,
+    address: string,
+    city: string,
+    postalCode: string,
+    country: string
+    )
+    : ThunkAction<void, RootState, unknown, AnyAction> =>
   async (dispatch, getState) => {
     dispatch({
       type: constants.CART_SAVE_SHIPPING_ADDRESS,
-      payload: data,
+      payload: {fullName, address, city, postalCode, country},
     });
 
     if (typeof window !== "undefined") {
-      localStorage.setItem("shippingAddress", JSON.stringify(data));
+      localStorage.setItem("shippingAddress", JSON.stringify({fullName, address, city, postalCode, country}));
+      // localStorage.setItem("shippingAddress", (getState().cart.shippingAddress));
     }
+    // else {
+    //   localStorage.getItem(getState().cart.shippingAddress)
+    //   }
   };
+
 
 export const savePaymentMethod =
   (data: any): ThunkAction<void, RootState, unknown, AnyAction> =>

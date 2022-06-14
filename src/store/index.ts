@@ -35,6 +35,9 @@ if (typeof window !== "undefined") {
 }
 
 if (typeof window !== "undefined") {
+  
+  const shippingData:any=localStorage.getItem("shippingAddress")
+  // shippingAddressFromStorage=shippingData? JSON.parse(shippingData):{}
   shippingAddressFromStorage = localStorage.getItem("shippingAddress")
     ? JSON.stringify(localStorage.getItem("shippingAddress"))
     : {};

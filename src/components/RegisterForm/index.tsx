@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/userActions";
 import { useRouter } from "next/router";
+import MainButton from "../MainButton";
 
 interface MyFormValues {
   name: string;
@@ -100,9 +101,8 @@ function RegisterForm() {
           />
           {errors.password && <p className="error">{errors.password}</p>}
         </FormControl>
-
-        <FormControl className="actions">
-          <Button type="submit">{loading ? "Loading..." : "Register"}</Button>
+        <FormControl>
+          <MainButton  onClick={handleSubmit} type="submit">{loading ? "Loading..." : "REGISTER"}</MainButton>
         </FormControl>
         {error && <p className="error">{error}</p>}
         {loading && <p>Loading...</p>}

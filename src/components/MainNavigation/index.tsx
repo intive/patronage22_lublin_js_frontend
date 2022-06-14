@@ -20,7 +20,7 @@ import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 
 const pages = ["Home", "Products", "About", "Contact"];
-const settings = ["Profile", "Account", "Dashboard"];
+const settings = ["Profile", "Orders"];
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -62,6 +62,7 @@ const MainNavigation = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
 
   return (
     <AppBar position="static" className="app-bar">
@@ -172,9 +173,11 @@ const MainNavigation = () => {
               </Link>
               <IconButton
                 onClick={handleOpenUserMenu}
-                sx={{ size: "medium", p: 0 }}
+                sx={{ size: "medium", p: 0, ml: 2 }}
               >
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar src="/broken-image.jpg"
+                  sx={{ color: 'white', bgcolor: '#0056ad', width: 24, height: 24 }}
+                />
               </IconButton>
               <Menu
                 sx={{ mt: "45px" }}
@@ -194,7 +197,11 @@ const MainNavigation = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center">
+                    <Link href={`/${setting.toLocaleLowerCase()}`}>
+                    <div className="nav-link">{setting}</div>
+                      </Link>
+                      </Typography>
                   </MenuItem>
                 ))}
                 <MenuItem

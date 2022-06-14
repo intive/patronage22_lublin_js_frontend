@@ -159,7 +159,7 @@ function ProductsPage({
                 style={{
                   height: "3px",
                   width: "42%",
-                  backgroundColor: "blue",
+                  backgroundColor: "#0057D8",
                   marginRight: "0.5rem",
                 }}
               ></div>
