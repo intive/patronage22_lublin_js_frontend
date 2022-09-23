@@ -38,17 +38,17 @@
 - Main Page with Hero, Featured products section, servises section and newsletter form,
 - About and Contact Page
 - Products Page:
-* with filtering and sorting sytem
-* search- filtering by the name, 
-* two ways of display products: list view, and grid view
+  * with filtering and sorting sytem
+  * search- filtering by the name, 
+  * two ways of display products: list view, and grid view
 - Single Product Page:
-* photos gallery
-* add to cart buuton and change amount
+  * photos gallery
+  * add to cart buuton and change amount
 - Cart Page
-* change quantity
-* remove item from cart
-* clear shopping cart
-* cart summary
+  * change quantity
+  * remove item from cart
+  * clear shopping cart
+  * cart summary
 - Log in with Bearer Token
 
 ## Figma drafts
