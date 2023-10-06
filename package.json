@@ -20,7 +20,7 @@
     "axios": "^0.26.1",
     "formik": "^2.2.9",
     "next": "^12.1.6",
-    "postcss": "^8.4.12",
+    "postcss": "^8.4.31",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-redux": "^7.2.8",
